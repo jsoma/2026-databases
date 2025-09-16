@@ -79,8 +79,12 @@ Three scenarios force you to the cloud: (1) Your investigation team needs to que
     - Understanding connection strings and permissions
     - BigQuery for truly massive datasets (know it exists)
   - File storage for documents/data
-    - S3/Google Cloud Storage/Backblaze B2 (use boto3)* (for processed data)
+    - Backblaze B2* (simpler and cheaper than S3)
+    - Use boto3 with B2's S3-compatible API
     - Organizing investigation materials (naming conventions, versioning)
+  - Quick cloud exploration
+    - Datasette Cloud for instant database sharing
+    - TablePlus for GUI access to Postgres
 
 **Stories This Enables**:
 - Collaborative investigations like Panama Papers (shared database)
@@ -140,6 +144,7 @@ Big investigations require teamwork. During the Panama Papers, hundreds of journ
 - **Technical Skills**:
   - Exploration and research tools
     - Datasette* for internal SQL exploration (safe, no DELETE accidents)
+    - Datasette Cloud for quick sharing without infrastructure
     - Pre-populated Aleph instances for document investigations
     - DocumentCloud for smaller document sets
   - Understanding investigation platforms

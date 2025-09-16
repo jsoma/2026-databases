@@ -38,22 +38,12 @@ A comprehensive list of all technologies mentioned in the course curriculum, wit
 - **Week**: 3-4
 - **Why**: Managed Postgres option
 
-#### AWS S3
-- **Docs**: https://docs.aws.amazon.com/s3/
-- **Getting Started**: https://aws.amazon.com/s3/getting-started/
-- **Week**: 3-4
-- **Why**: File storage for processed data
-
-#### Google Cloud Storage
-- **Docs**: https://cloud.google.com/storage/docs
-- **Quickstart**: https://cloud.google.com/storage/docs/quickstart-console
-- **Week**: 3-4
-- **Why**: Alternative to S3
-
 #### Backblaze B2
 - **Docs**: https://www.backblaze.com/b2/docs/
+- **Getting Started**: https://www.backblaze.com/b2/docs/quick_account.html
+- **Python Integration**: https://www.backblaze.com/b2/docs/python.html
 - **Week**: 3-4
-- **Why**: Affordable S3-compatible storage
+- **Why**: Simpler and cheaper than S3, S3-compatible API
 
 #### boto3
 - **Docs**: https://boto3.amazonaws.com/v1/documentation/api/latest/
@@ -82,8 +72,15 @@ A comprehensive list of all technologies mentioned in the course curriculum, wit
 - **Docs**: https://docs.datasette.io/
 - **Getting Started**: https://docs.datasette.io/en/stable/getting_started.html
 - **Tutorial**: https://datasette.io/tutorials/
-- **Week**: 7-8
-- **Why**: Internal SQL exploration, data sharing
+- **Datasette Cloud**: https://datasette.cloud/
+- **Week**: 3-4 (Cloud), 7-8 (local)
+- **Why**: Internal SQL exploration, instant cloud sharing
+
+#### TablePlus
+- **Download**: https://tableplus.com/
+- **Docs**: https://docs.tableplus.com/
+- **Week**: 3-4
+- **Why**: GUI for Postgres, easier than psql
 
 #### Flask
 - **Docs**: https://flask.palletsprojects.com/

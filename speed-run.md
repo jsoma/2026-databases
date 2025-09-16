@@ -50,19 +50,26 @@ Download HMDA mortgage data for one county from [CFPB](https://ffiec.cfpb.gov/da
 
 ### Learn the Tech
 
-#### Cloud Storage Basics
-Sign up for [DigitalOcean free credits](https://www.digitalocean.com/github-students) or AWS free tier. Follow the [DigitalOcean Spaces quickstart](https://docs.digitalocean.com/products/spaces/quickstart/). Upload your PPP data CSV to cloud storage:
+#### Quick Win: Datasette Cloud
+Start with [Datasette Cloud](https://datasette.cloud/) - upload your SQLite database and instantly share it with collaborators. No setup required, free tier available. This is the fastest way to understand cloud benefits.
+
+#### Cloud Storage for Files
+When you have many documents (PDFs, images, data files) to share with a team, use [Backblaze B2](https://www.backblaze.com/b2/). It's simpler than AWS S3 and much cheaper:
    ```python
-   import boto3  # Works with S3 and DO Spaces
-   s3 = boto3.client('s3', endpoint_url='https://nyc3.digitaloceanspaces.com')
-   s3.upload_file('ppp_data.csv', 'my-bucket', 'ppp_data.csv')
+   import boto3
+   s3 = boto3.client('s3',
+       endpoint_url='https://s3.us-west-002.backblazeb2.com',
+       aws_access_key_id='your_key',
+       aws_secret_access_key='your_secret')
+   # Upload investigation documents
+   s3.upload_file('document.pdf', 'investigation-bucket', 'docs/document.pdf')
    ```
 
-#### Managed Database
-Create a DigitalOcean managed Postgres instance ($15/month, can destroy after testing). Get the connection string and connect with psql. Import your PPP data and query from your local machine.
+#### Shared Database Access
+Create a managed Postgres instance on DigitalOcean ($15/month). Instead of psql, use [TablePlus](https://tableplus.com/) for a friendly GUI. Import your local PPP data, then share read-only credentials with collaborators.
 
 ### Practice Investigation
-Set up a shared database that two people can query simultaneously. Have each person run different analyses on the same dataset.
+Upload a SQLite database to Datasette Cloud. Share the link with someone else. Both query the same data simultaneously without any setup on their end.
 
 ## Week 5-6: Automation & Long-term Projects
 
