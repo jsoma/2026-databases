@@ -89,6 +89,13 @@ A comprehensive list of all technologies mentioned in the course curriculum, wit
 - **Week**: 9-10
 - **Why**: Building public-facing data tools
 
+#### Render
+- **Homepage**: https://render.com/
+- **Docs**: https://render.com/docs
+- **Deploy Flask Guide**: https://render.com/docs/deploy-flask
+- **Week**: 9-10
+- **Why**: Simple, free deployment for Flask apps (easier than Heroku)
+
 #### Jinja2
 - **Docs**: https://jinja.palletsprojects.com/
 - **Tutorial**: https://jinja.palletsprojects.com/en/latest/intro/

@@ -32,6 +32,7 @@ If you can't do these, review first-semester materials before class begins.
 
 ### Week 1-2: Working with Large Government Databases
 **Core Question**: How do you handle datasets too big for Excel but not worth the cloud?
+→ [Assignment](assignments.md#week-1-2-large-local-databases) | [Readings](readings.md#week-1-2-working-with-large-government-databases) | [Tech](tech-stack.md#databases)
 
 **Journalistic Context**: 
 You've just received HMDA mortgage data (25 million rows), PPP loans (11 million rows), or Medicare payments to doctors. These datasets are too large for pandas to handle comfortably but don't require distributed computing. You need to quickly explore them, find patterns, and identify potential stories without waiting for cloud infrastructure.
@@ -64,6 +65,7 @@ You've just received HMDA mortgage data (25 million rows), PPP loans (11 million
 
 ### Week 3-4: When and Why to Use the Cloud
 **Core Question**: When is it worth moving beyond your laptop?
+→ [Assignment](assignments.md#week-3-4-cloud-infrastructure) | [Readings](readings.md#week-3-4-when-and-why-to-use-the-cloud) | [Tech](tech-stack.md#cloud-infrastructure)
 
 **Journalistic Context**:
 Three scenarios force you to the cloud: (1) Your investigation team needs to query the same database simultaneously, (2) You're building something the public will access (like ProPublica's Nonprofit Explorer), or (3) You're processing data continuously (like election results). The cloud isn't about "big data" - it's about access and availability.
@@ -97,6 +99,7 @@ Three scenarios force you to the cloud: (1) Your investigation team needs to que
 
 ### Week 5-6: Long-term Data Projects
 **Core Question**: How do you manage datasets you'll work with for months?
+→ [Assignment](assignments.md#week-5-6-automation--change-tracking) | [Readings](readings.md#week-5-6-long-term-data-projects) | [Tech](tech-stack.md#automation--workflows)
 
 **Journalistic Context**:
 Most important investigations aren't built on breaking news - they're built on systematic analysis of data over time. ProPublica's Dollars for Docs took months to clean, verify, and build. The LA Times' LAPD crime statistics investigation required comparing years of reports. You need systems that let you incrementally improve data quality, track your cleaning decisions, and update analyses as new data arrives.
@@ -132,6 +135,7 @@ Most important investigations aren't built on breaking news - they're built on s
 
 ### Week 7-8: Collaborative Investigation Infrastructure
 **Core Question**: How do you coordinate when five reporters are working on the same dataset?
+→ [Assignment](assignments.md#week-7-8-collaborative-investigation) | [Readings](readings.md#week-7-8-collaborative-investigation-infrastructure) | [Tech](tech-stack.md#document-processing--investigation)
 
 **Journalistic Context**:
 Big investigations require teamwork. During the Panama Papers, hundreds of journalists needed to search the same document set without stepping on each other's toes. For local investigations, you might have reporters in different cities analyzing the same police data. You need systems where reporters can explore data, claim stories, share findings, and avoid duplication.
@@ -165,6 +169,7 @@ Big investigations require teamwork. During the Panama Papers, hundreds of journ
 
 ### Week 9-10: Building Public-Facing Data Tools
 **Core Question**: How do you let readers explore your investigation?
+→ [Assignment](assignments.md#week-9-10-public-facing-tools) | [Readings](readings.md#week-9-10-building-public-facing-data-tools) | [Tech](tech-stack.md#data-tools--publishing)
 
 **Journalistic Context**:
 The best data investigations don't just tell one story - they provide tools for readers to find their own stories. ProPublica's Nonprofit Explorer lets anyone research tax-exempt organizations. The Texas Tribune's salary database lets citizens see what public employees earn. These tools extend your journalism's impact and build trust through transparency.
@@ -201,6 +206,7 @@ The best data investigations don't just tell one story - they provide tools for 
 
 ### Week 11-12: Document Intelligence at Scale
 **Core Question**: How do you make 100,000 documents searchable and explorable?
+→ [Assignment](assignments.md#week-11-12-document-intelligence-at-scale) | [Readings](readings.md#week-11-12-document-intelligence-at-scale) | [Tech](tech-stack.md#ai--machine-learning)
 
 **Journalistic Context**:
 You've received a massive FOIA dump: 100,000 PDFs from city emails, or thousands of contracts in multiple languages (like Quartz's Luanda Leaks investigation of Angolan documents in Portuguese). Traditional keyword search fails because bureaucrats use euphemisms, documents are in different languages, and what you're looking for might be described a dozen different ways. AI excels at this specific task: making unstructured documents structured and searchable.
@@ -246,6 +252,7 @@ You've received a massive FOIA dump: 100,000 PDFs from city emails, or thousands
 
 ### Week 13: Sustainability and Handoffs
 **Core Question**: What happens to your data project after you publish?
+→ [Assignment](assignments.md#week-13-sustainability) | [Readings](readings.md#week-13-sustainability-and-handoffs)
 
 **Journalistic Context**:
 Many data projects die after publication. The reporter moves on, the data gets stale, the tools break. But the best investigations live on - updated annually, used by other newsrooms, cited in lawsuits. Building sustainably from the start makes this possible.
