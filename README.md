@@ -48,9 +48,3 @@ Second-semester core course in the Columbia Journalism School Data Journalism MS
     - "You're free!"
     - GitHub Actions, Documentation
     - [Assignment](assignments.md#week-14-sustainability--handoffs) • [Readings](readings.md#week-14-sustainability-and-handoffs)
-
-## Getting Started
-
-1. **Instructors**: Start with [curriculum.md](curriculum.md) then review [speed-run.md](speed-run.md)
-2. **Students**: Check [assignments.md](assignments.md) for this week's work
-3. **Self-learners**: Follow [speed-run.md](speed-run.md) for independent study
