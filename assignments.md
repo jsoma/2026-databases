@@ -1,299 +1,257 @@
 # Data and Databases: Assignments
 
-Progressive exercises designed to build from basic competency to advanced investigation skills. Each assignment has Foundation (required), Extension (recommended), and Innovation (optional) tiers.
+14-week assignment structure with Foundation (required), Extension (recommended), and Innovation (optional) tiers. Each week includes technical work and written reflection.
 
-## Week 1-2: Large Local Databases
-[See curriculum](curriculum.md#week-1-2-working-with-large-government-databases) | [Tech stack](tech-stack.md#databases)
+## For Instructors
 
-### Foundation: Find the Story
-**Dataset**: One month of PPP loans from your state (download from [SBA](https://data.sba.gov/dataset/ppp-foia))
+Each assignment includes:
+- **Instructor Provides**: Materials/templates you supply (with low-prep and high-prep options)
+- **Time Estimate**: How long students typically need
+- **Common Issues**: Problems to anticipate
+- **Writing Prompt**: Reflection focusing on journalistic applications
 
-**Tasks**:
-1. Load the data into DuckDB without importing to memory
-2. Answer these questions with SQL:
+Choose the instructor prep level that fits your schedule.
+
+## Weeks 1-2: Large Government Databases
+[Curriculum](curriculum.md#weeks-1-2-working-with-large-government-databases) | [Tech stack](tech-stack.md#databases)
+
+### Instructor Provides
+**Low-prep option**: Links to PPP data, sample queries
+**High-prep option**: Pre-downloaded state data, DuckDB tutorial notebook, pandas comparison code
+
+### Foundation: Query Without Crashing
+**Dataset**: One month of PPP loans from your state
+
+**Technical**:
+1. Load data into DuckDB (not memory)
+2. Answer three questions:
    - Which city received the most loan money?
-   - What industry had the highest average loan amount?
-   - Find loans that saved zero jobs but received >$100k
-3. Compare performance: time the same query in pandas vs DuckDB
+   - What's the average loan by industry?
+   - Find suspicious patterns (you define "suspicious")
 
-**Deliverable**: SQL queries, timing comparison, and one paragraph about most surprising finding
+**Writing Prompt** (300 words): "What story would you pursue based on your findings? What additional data would you need?"
 
-### Extension: Pattern Detection
-**Additional analysis on same dataset**:
-- Use window functions to rank businesses by loan amount within each city
-- Calculate loan per employee ratios and identify statistical outliers
-- Demonstrate the workflow difference: 
-  - Option A: Load everything into pandas (watch it struggle/crash)
-  - Option B: Query in SQL, then load subset into pandas for visualization
+### Extension: Pandas vs SQL Workflow
+Demonstrate when to use each tool:
+- Try loading full dataset in pandas (document what happens)
+- Use SQL to filter, then pandas for visualization
+- Time both approaches
 
-**Deliverable**: Jupyter notebook showing both workflows and when to use each
+### Innovation: Build a Flag System
+Create reusable code that flags suspicious loans based on patterns you identified.
 
-### Innovation: Build a Checker
-Create a reusable Python script that:
-- Accepts any state's PPP data
-- Automatically flags suspicious patterns based on your analysis
-- Outputs both a summary report and detailed CSV for investigation
-- Includes proper indexes for common queries (demonstrating performance improvement)
+**Common Issues**: Memory errors with pandas, SQL syntax confusion, file path problems
 
-**Deliverable**: GitHub repo with tool and documentation
+## Weeks 3-4: Cloud Infrastructure  
+[Curriculum](curriculum.md#weeks-3-4-when-and-why-to-use-the-cloud) | [Tech stack](tech-stack.md#cloud-infrastructure)
 
-## Week 3-4: Cloud Infrastructure
-[See curriculum](curriculum.md#week-3-4-when-and-why-to-use-the-cloud) | [Tech stack](tech-stack.md#cloud-infrastructure)
+### Instructor Provides
+**Low-prep**: Datasette Cloud tutorial, sample investigation documents
+**High-prep**: Pre-configured Postgres with real data, B2 bucket with document collection
 
-### Foundation: Share Your Data
-1. Convert your PPP analysis to SQLite
-2. Upload to [Datasette Cloud](https://datasette.cloud/)
-3. Create three saved queries that reporters could use
-4. Share link with classmate - they must find one insight you missed
+### Foundation: Investigation Infrastructure
+1. Upload analysis database to Datasette Cloud
+2. Create saved queries your editor would actually use
+3. Store 20+ investigation documents in B2 (PDFs, images, spreadsheets)
+4. Share both with a partner who acts as your editor
 
-**Deliverable**: Datasette instance URL with documented queries
+**Writing Prompt** (300 words): "Your editor is in DC, you're in NYC, and a source in Miami just sent documents. How does cloud infrastructure change this investigation? What couldn't you do before?"
 
-### Extension: Build Investigation Infrastructure
-**Scenario**: Your newsroom is investigating PPP fraud across multiple states
+### Extension: Multi-User Database
+- Set up shared Postgres for team investigation
+- Create read-only access for fact-checkers
+- Build simple intake form for new data
 
-Students receive a Flask application template with:
-- Forms for data entry
-- Document upload interface  
-- Annotation system
+### Innovation: Cost-Benefit Analysis
+Calculate actual costs for a 6-month investigation with 5TB of documents and 3 reporters.
 
-**Your task**: Build the backend
-1. Design Postgres database schema for investigations
-2. Implement Flask routes to handle form submissions
-3. Connect document uploads to Backblaze B2
-4. Set up shared Postgres instance on DigitalOcean
-5. Create read-only credentials for other reporters
+**Common Issues**: Not understanding read vs write permissions, B2 bucket naming restrictions
 
-**Deliverable**: Working backend that multiple students can use simultaneously
+## Weeks 5-6: Automation & Scraping
+[Curriculum](curriculum.md#weeks-5-6-long-term-data-projects) | [Tech stack](tech-stack.md#automation--workflows)
 
-### Innovation: Performance Optimization
-Using increasingly large datasets (1GB → 10GB → 100GB):
-1. Measure query performance before and after adding indexes
-2. Document when to use: 
-   - DuckDB on local files
-   - Postgres with good indexes
-   - BigQuery for truly massive data
-3. Create decision tree for other journalists
+### Instructor Provides
+**Low-prep**: GitHub Actions template, government sites that update daily
+**High-prep**: Working scraper example, change detection code, alert system
 
-**Deliverable**: Performance analysis with recommendations
+### Foundation: Build a News Scraper
+Create GitHub Action that scrapes a government website daily.
 
-## Week 5-6: Automation & Change Tracking
-[See curriculum](curriculum.md#week-5-6-long-term-data-projects) | [Tech stack](tech-stack.md#automation--workflows)
+**Technical**: 
+- Scrape agency press releases or data updates
+- Store each day's version
+- After one week, identify what changed and when
 
-### Foundation: Three Ways to Track
-Build three different GitHub Actions that demonstrate core patterns:
+**Writing Prompt** (300 words): "A source claims the government quietly changed policy last week. How would your scraper help verify this? What other sites would you start tracking?"
 
-**Pattern 1: Change Detection**
-- Daily download of government webpage
-- Commit only if changed
-- Descriptive commit messages about what changed
+### Extension: Smart Change Detection
+- Detect meaningful changes (not just timestamps)
+- Create alerts for specific keywords appearing
+- Build changelog showing what was added/removed
 
-**Pattern 2: Running List** 
-- Daily scrape of new items (e.g., press releases)
-- Append to existing CSV
-- Never lose historical data
+### Innovation: Investigation Memory
+Build system tracking multiple related sites to spot coordinated changes.
 
-**Pattern 3: Full Replacement**
-- Daily download of complete dataset
-- Replace entire file
-- Git tracks the differences
+**Common Issues**: Sites blocking GitHub IPs, dynamic content that changes every load
 
-Run all three for one week without breaking.
+## Weeks 7-8: Collaborative Investigation Infrastructure
+[Curriculum](curriculum.md#weeks-7-8-collaborative-investigation-infrastructure) | [Readings](readings.md#weeks-7-8-collaborative-investigation-infrastructure) | [Tech](tech-stack.md#document-processing--investigation)
 
-**Deliverable**: GitHub repo with three working Actions and week of history
+### Instructor Provides
+**Low-prep**: Sample documents, shared spreadsheet, Datasette instance
+**High-prep**: Pre-configured Aleph/DocumentCloud, shared database, coordination platform
 
-### Extension: Smart Alerting
-Enhance one of your trackers:
-- Detect significant changes (define what "significant" means for your data)
-- Create GitHub issue when threshold exceeded
-- Generate human-readable summary of changes
-- Include visualization of trend
+### Foundation: Document Processing and Team Coordination
+**Week 7 Focus - Document Triage**:
+- Process 50 documents into structured format
+- Classify by relevance and story potential
+- Extract key entities and dates
+- Build searchable index
 
-**Deliverable**: Enhanced tracker with alert history
+**Week 8 Focus - Team Coordination**:
+- Divide document set among team
+- Claim specific topics/entities to investigate
+- Document findings in shared system
+- Identify patterns across documents
 
-### Innovation: Story Discovery Engine
-Combine multiple tracking approaches:
-- Monitor 5+ related government sources
-- Identify correlations between changes
-- Statistical anomaly detection
-- Generate weekly "story leads" report
+**Writing Prompt** (500 words): "Your team has 10,000 documents to review in 2 weeks. Design the complete workflow: How do you divide work, avoid duplication, surface important findings, and ensure nothing is missed?"
 
-**Deliverable**: Multi-source monitoring system
+### Extension: Investigation Infrastructure
+- Set up Aleph or DocumentCloud instance
+- Build entity extraction pipeline
+- Create automated classification rules
+- Design tip intake system
 
-## Week 7-8: Collaborative Investigation
-[See curriculum](curriculum.md#week-7-8-collaborative-investigation-infrastructure) | [Tech stack](tech-stack.md#document-processing--investigation)
+### Innovation: Cross-Dataset Analysis
+Connect document findings with structured databases to find patterns.
 
-### Foundation: Manual to Automated
-**Phase 1: Manual Review** (Week 7)
-- Each student receives 50 government documents (PDFs)
-- Manually classify as: "Relevant", "Maybe", "Not Relevant" 
-- Extract key information into spreadsheet
-- Document your decision criteria
+**Common Issues**: PDF extraction failures, inconsistent classification, coordination breakdowns
 
-**Phase 2: Automation** (Week 8)
-- Write rules based on your manual criteria
-- Test on new set of 50 documents
-- Compare automated results to manual review
-- Calculate accuracy
+## Week 9: Graph Databases and Network Analysis
+[Curriculum](curriculum.md#week-9-graph-databases) | [Readings](readings.md#week-9-graph-databases) | [Tech](tech-stack.md#databases)
 
-**Deliverable**: Classification rules and accuracy report
+### Instructor Provides
+**Low-prep**: Neo4j Sandbox account, sample network data
+**High-prep**: Pre-populated graph database, investigation data, Cypher query library
 
-### Extension: Collaborative Platform
-Using the Flask template from Week 3-4:
-1. Add document classification interface
-2. Store classifications in shared Postgres
-3. Build consensus system (what if two people disagree?)
-4. Create training data export for machine learning
+### Foundation: Map the Network
+**Technical**:
+- Load entity data into Neo4j (people, companies, transactions)
+- Find shortest paths between entities
+- Identify most connected nodes
+- Query for circular money flows
+- Visualize key relationships
 
-**Deliverable**: Working classification platform used by entire class
+**Writing Prompt** (300 words): "You discovered a company connected to 5 politicians through 3 shell companies. How do you verify these connections are real? What additional data would strengthen the story?"
 
-### Innovation: Custom Classifier
-Using class's combined manual classifications:
-1. Train simple classifier (connect to stats/ML class)
-2. Test on held-out documents
-3. Build confidence scoring
-4. Create human-in-the-loop workflow for low-confidence predictions
+### Extension: Advanced Network Analysis
+- Export from Aleph to Neo4j
+- Calculate network centrality metrics
+- Find hidden clusters
+- Build automated alert for new connections
 
-**Deliverable**: Trained classifier with documentation
+### Innovation: Investigation Graph Tool
+Build interface for non-technical reporters to explore network connections.
 
-## Week 9-10: Public-Facing Tools
-[See curriculum](curriculum.md#week-9-10-building-public-facing-data-tools) | [Tech stack](tech-stack.md#data-tools--publishing)
+**Common Issues**: Cypher syntax confusion, relationship directionality, scale visualization
 
-### Foundation: Simple Search Tool
-Build basic public interface with Flask:
-1. Search box that queries your PPP database
-2. Results page with pagination
-3. Individual record view
-4. Mobile-responsive design (use template)
-5. Deploy to [Render](https://render.com/)
+## Weeks 10-11: Public-Facing Tools
+[Curriculum](curriculum.md#weeks-10-11-building-public-facing-data-tools) | [Readings](readings.md#weeks-10-11-building-public-facing-data-tools) | [Tech stack](tech-stack.md#data-tools--publishing)
 
-**Deliverable**: Public URL of working search tool
+### Instructor Provides
+**Low-prep**: Flask template with HTML/CSS, deployment guide
+**High-prep**: Complete frontend, database connection examples, Render account
 
-### Extension: Journalist-Friendly Features
-Enhance your tool:
-- Advanced filters (date ranges, loan sizes, industries)
-- SQL query builder for non-programmers
-- CSV download of search results
-- Embed widget for other newsrooms
-- Add "story ideas" based on data patterns in results
+### Foundation: Searchable Database
+**Technical**:
+- Flask app searching your investigation data
+- Results show context (why each result matters)
+- Deploy to Render
+- Test with non-technical user
 
-**Deliverable**: Production-ready tool with documentation
+**Writing Prompt** (300 words): "A reader used your tool to find their employer taking questionable payments. They want the raw data. What do you provide? What are the ethical considerations?"
 
-### Innovation: Investigation Platform
-Build tool that enables investigation:
-- User accounts for saving searches
-- Collaboration features (share interesting finds)
-- Automated alerts for new data matching saved searches
-- API for programmatic access
-- Public tips submission form
+### Extension: Power User Features
+- Advanced filters actual users would need
+- Bulk download with documentation
+- API endpoint for other newsrooms
 
-**Deliverable**: Platform enabling citizen journalism
+### Innovation: Story Leads
+Add features that surface potential stories automatically.
 
-## Week 11-12: Document Intelligence at Scale
-[See curriculum](curriculum.md#week-11-12-document-intelligence-at-scale) | [Tech stack](tech-stack.md#ai--machine-learning)
+**Common Issues**: Production database credentials exposed, site crashing under load
 
-### Foundation: Entity Extraction
-Process 50 government PDFs:
-1. Use OpenAI/Anthropic API for entity extraction
-2. Extract: people, organizations, dates, money amounts
-3. Manually verify 10 documents (20%) for accuracy
-4. Create spreadsheet of all entities found
-5. Flag documents with low confidence for human review
+## Weeks 12-13: AI Document Processing
+[Curriculum](curriculum.md#weeks-12-13-document-intelligence-at-scale) | [Readings](readings.md#weeks-12-13-document-intelligence-at-scale) | [Tech stack](tech-stack.md#ai--machine-learning)
 
-**Deliverable**: Structured dataset from unstructured documents
+### Instructor Provides
+**Low-prep**: OpenAI API key with credits, links to government press releases
+**High-prep**: Curated document set (mix of formats/topics), entity extraction template, multilingual examples
 
-### Extension: Multilingual Investigation
-**Scenario**: You received documents in Spanish, Portuguese, and English
-1. Detect language of each document
-2. Translate non-English documents (or key sections)
-3. Extract entities consistently across languages
-4. Build unified search that works in any language
-5. Create bilingual output for publication
+### Foundation: Extract Entities
+**Technical**:
+- Process 10-20 documents with AI (press releases, brief reports, or memos work well)
+- Extract people, organizations, money amounts
+- Verify every extraction against the original document
+- Create error log documenting AI mistakes
 
-**Deliverable**: Cross-language investigation tool and findings
+**Writing Prompt** (300 words): "What types of errors did the AI make? Were there patterns in what it missed or misidentified?"
 
-### Innovation: Beat-Specific Intelligence
-Build specialized tool for your beat:
-1. Develop custom prompts that understand your beat's terminology
-2. Create verification checklist specific to your topic
-3. Build confidence scoring based on your beat's requirements
-4. Design workflow mixing AI and human verification
-5. Test on real documents from your beat
+### Extension: Multilingual Documents
+**Scenario**: Documents in multiple languages
+- Detect languages
+- Translate key sections
+- Extract entities consistently
 
-**Deliverable**: Beat-specific AI tool with accuracy metrics
+### Innovation: Beat-Specific Tool
+Customize prompts and verification for your beat.
 
-## Week 13: Sustainability
-[See curriculum](curriculum.md#week-13-sustainability-and-handoffs)
+**Common Issues**: API rate limits, cost management, accuracy vs speed
 
-### Foundation: Handoff Package
-Choose one previous project and create:
-1. README with: purpose, data sources, update schedule
-2. Requirements.txt with all dependencies
-3. GitHub Action for automated updates
-4. Documentation of common errors and fixes
-5. Video walkthrough (5 minutes max)
+## Week 14: Sustainability & Handoffs
+[Curriculum](curriculum.md#week-14-sustainability-and-handoffs) | [Readings](readings.md#week-14-sustainability-and-handoffs)
 
-**Deliverable**: Complete handoff package
+### Instructor Provides
+**Low-prep**: README template, documentation examples
+**High-prep**: Automated testing framework, monitoring setup
 
-### Extension: Resilient Systems
-Make your project bulletproof:
-- Add error handling for common failures
-- Set up monitoring (uptime, data freshness)
-- Create fallback options (what if API dies?)
-- Add data quality checks
-- Build admin interface for non-technical users
+### Foundation: Documentation
+**Technical**:
+- Write README for one project
+- Include: purpose, setup, common issues
+- Add automation for updates
 
-**Deliverable**: Production-hardened system
+**Writing Prompt** (500 words): "Reflect on the semester: Which tools will you actually use? What's still missing?"
+
+### Extension: Production-Ready
+- Add error handling
+- Create monitoring
+- Build simple admin interface
 
 ### Innovation: Newsroom Toolkit
-Package your best tools for adoption:
-1. Create template repository others can fork
-2. Write tutorial for your specific use case
-3. Add configuration options for different newsrooms
-4. Create example investigations using your tool
-5. Present to class (10 minutes)
+Package your best work as reusable template.
 
-**Deliverable**: Shareable toolkit with presentation
+**Common Issues**: Incomplete documentation, hardcoded credentials
 
-## Capstone Integration
+## Assessment Structure
 
-Throughout the semester, students should be thinking about their capstone project. Each assignment can contribute:
+### Technical Work
+- Foundation: Must work and address the core question
+- Extension: Shows deeper understanding
+- Innovation: Creative application
 
-- **Weeks 1-2**: Identify interesting dataset for long-term investigation
-- **Weeks 3-4**: Set up infrastructure you'll need
-- **Weeks 5-6**: Build monitoring for your beat
-- **Weeks 7-8**: Collaborate with potential partners
-- **Weeks 9-10**: Design public interface for findings
-- **Weeks 11-12**: Process documents related to investigation
-- **Week 13**: Document everything for portfolio
+### Written Reflections
+- Weekly 300-500 word reflections
+- Focus on journalistic applications, not technical description
+- Critical thinking about limitations and possibilities
 
-## Grading Approach
+## Tips for Instructors
 
-### Foundation (70% of grade)
-Must work and answer the journalistic question
+### Managing Different Skill Levels
+- Extension work can replace Foundation for advanced students or students with additional time
 
-### Extension (20% of grade)
-Demonstrates deeper understanding and technical growth
-
-### Innovation (10% of grade)
-Shows creativity and real-world applicability
-
-### Alternative: Investigation Portfolio
-Students can propose replacing standard assignments with a semester-long investigation that demonstrates all skills. Requires instructor approval and regular check-ins.
-
-## Support Structures
-
-### Weekly Lab Sessions
-- First hour: Review and Q&A
-- Second hour: Hands-on work with TA support
-- Third hour: Peer debugging and sharing
-
-### Office Hours
-- Technical debugging (TA-led)
-- Investigation consulting (Instructor-led)
-- Peer mentoring (advanced students help others)
-
-### Resources
-- [Speed-run guide](speed-run.md) for catching up
-- [Tech stack reference](tech-stack.md) with all tools
-- [Readings](readings.md) for context and examples
-- Class Slack for questions and collaboration
+## Resources
+- [Speed-run guide](speed-run.md) - For catching up
+- [Tech stack](tech-stack.md) - All tools documented
+- [Readings](readings.md) - Context and examples
+- [Curriculum](curriculum.md) - Week-by-week overview

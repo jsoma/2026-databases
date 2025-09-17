@@ -103,7 +103,7 @@ Build a simple Python script that compares yesterday's data to today's. Use git 
 ### Practice Investigation
 Pick a government data source that updates regularly (COVID data, crime stats, etc.). Build a GitHub Action that downloads the data daily, compares to yesterday, commits changes to git, and creates an issue if something significant changed.
 
-## Week 7-8: Collaborative Tools
+## Weeks 7-8: Collaborative Investigation
 
 ### Context Reading
 [How ICIJ coordinated Panama Papers](https://www.icij.org/investigations/panama-papers/) and [Inside Cyprus Confidential methodology](https://www.icij.org/investigations/cyprus-confidential/leaked-data-journalism-methodology/).
@@ -125,7 +125,28 @@ Explore [DocumentCloud](https://www.documentcloud.org/) by creating a free accou
 ### Practice Investigation
 Take your PPP loan database, publish it with Datasette, create saved queries for common questions, and share with a colleague for exploration.
 
-## Week 9-10: Public-Facing Tools
+## Week 9: Graph Databases
+
+### Context Reading
+[ICIJ's Use of Graph Databases](https://neo4j.com/customer-stories/icij/) and [Linkurious Panama Papers visualization](https://linkurious.com/blog/panama-papers-how-linkurious-enables-icij-to-investigate-the-massive-mossack-fonseca-leaks/).
+
+### Learn the Tech
+
+#### Neo4j Basics
+Set up [Neo4j Sandbox](https://sandbox.neo4j.com/) (free, no install). Follow the [Cypher tutorial](https://neo4j.com/docs/cypher-manual/current/). Create a network of people, companies, and transactions:
+   ```cypher
+   CREATE (p:Person {name: 'John Doe'})
+   CREATE (c:Company {name: 'Shell Corp'})
+   CREATE (p)-[:OWNS]->(c)
+   ```
+
+#### Network Analysis
+Find shortest paths, most connected nodes, and circular flows. Export visualizations for stories.
+
+### Practice Investigation
+Load investigation data with entities and relationships. Find hidden connections between politicians and companies through shell corporations.
+
+## Weeks 10-11: Public-Facing Tools
 
 ### Context Reading
 Explore [ProPublica's Nonprofit Explorer](https://projects.propublica.org/nonprofits/), [Texas Tribune Salaries](https://salaries.texastribune.org/), and [ProPublica's News App guides](https://github.com/propublica/guides).
@@ -159,7 +180,7 @@ Create basic HTML templates with Jinja2. Add pagination, filters, and CSV downlo
 ### Practice Investigation
 Build a simple public-facing tool for your PPP data with search by company name, filter by loan amount ranges, CSV download, and deployment to Heroku free tier or GitHub Pages.
 
-## Week 11-12: AI Document Processing
+## Weeks 12-13: AI Document Processing
 
 ### Context Reading
 [How Quartz used AI for Luanda Leaks](https://qz.com/1786896/ai-for-investigations-sorting-through-the-luanda-leaks) and [BuzzFeed FinCEN Files methodology](https://www.buzzfeednews.com/article/jsvine/fincen-files-explainer-data-money-transactions).
@@ -188,7 +209,7 @@ Download [LM Studio](https://lmstudio.ai/) and a small model like Llama 3.2 3B. 
 ### Practice Investigation
 Take 50-100 PDFs (FOIA documents, court records, etc.). Use AI to extract all mentioned entities, build a simple database of people, organizations, and dates, then find connections between documents.
 
-## Week 13: Sustainability
+## Week 14: Sustainability
 
 ### Context Reading
 [What We've Learned About Sharing Our Data Analysis](https://source.opennews.org/articles/what-weve-learned-about-sharing-our-data-analysis/) and [AP's Datakit](https://github.com/associatedpress/datakit).

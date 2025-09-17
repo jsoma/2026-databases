@@ -30,7 +30,7 @@ If you can't do these, review first-semester materials before class begins.
 
 ## Weekly Breakdown
 
-### Week 1-2: Working with Large Government Databases
+### Weeks 1-2: Working with Large Government Databases
 **Core Question**: How do you handle datasets too big for Excel but not worth the cloud?
 → [Assignment](assignments.md#week-1-2-large-local-databases) | [Readings](readings.md#week-1-2-working-with-large-government-databases) | [Tech](tech-stack.md#databases)
 
@@ -63,7 +63,9 @@ You've just received HMDA mortgage data (25 million rows), PPP loans (11 million
 **Nice-to-Haves**:
 - PostGIS for redistricting analysis
 
-### Week 3-4: When and Why to Use the Cloud
+**Quick Win**: "Look, you just queried 10 million rows on your laptop"
+
+### Weeks 3-4: When and Why to Use the Cloud
 **Core Question**: When is it worth moving beyond your laptop?
 → [Assignment](assignments.md#week-3-4-cloud-infrastructure) | [Readings](readings.md#week-3-4-when-and-why-to-use-the-cloud) | [Tech](tech-stack.md#cloud-infrastructure)
 
@@ -97,7 +99,9 @@ Three scenarios force you to the cloud: (1) Your investigation team needs to que
 - Budget alerts (don't accidentally spend $1000)
 - Backup strategies for critical investigations
 
-### Week 5-6: Long-term Data Projects
+**Quick Win**: "You just shared a database with zero configuration"
+
+### Weeks 5-6: Long-term Data Projects
 **Core Question**: How do you manage datasets you'll work with for months?
 → [Assignment](assignments.md#week-5-6-automation--change-tracking) | [Readings](readings.md#week-5-6-long-term-data-projects) | [Tech](tech-stack.md#automation--workflows)
 
@@ -133,7 +137,9 @@ Most important investigations aren't built on breaking news - they're built on s
 - Data quality tests
 - Automated fact-checking of new data
 
-### Week 7-8: Collaborative Investigation Infrastructure
+**Quick Win**: "Your scraper ran automatically while you slept"
+
+### Weeks 7-8: Collaborative Investigation Infrastructure
 **Core Question**: How do you coordinate when five reporters are working on the same dataset?
 → [Assignment](assignments.md#week-7-8-collaborative-investigation) | [Readings](readings.md#week-7-8-collaborative-investigation-infrastructure) | [Tech](tech-stack.md#document-processing--investigation)
 
@@ -167,7 +173,33 @@ Big investigations require teamwork. During the Panama Papers, hundreds of journ
 - Entity resolution across datasets
 - Secure drop integration
 
-### Week 9-10: Building Public-Facing Data Tools
+### Week 9: Graph Databases and Network Analysis
+**Core Question**: How do you find hidden connections in complex networks?
+→ [Assignment](assignments.md#week-9-graph-databases-and-network-analysis) | [Readings](readings.md#week-9-graph-databases-and-network-analysis) | [Tech](tech-stack.md#databases)
+
+**Journalistic Context**:
+Major investigations often involve complex networks of people, companies, and transactions. Traditional databases struggle with these relationships. Graph databases excel at finding paths between entities, identifying central figures, and revealing hidden connections that would take weeks to find manually.
+
+**Must-Haves**:
+- **Concepts**: 
+  - When graphs beat relational databases
+  - Thinking in nodes and edges
+  - Network centrality and influence
+- **Technical Skills**:
+  - Neo4j and Cypher queries*
+    - Loading entity data
+    - Finding shortest paths
+    - Identifying clusters
+    - Detecting circular flows
+  - Exporting from Aleph to Neo4j
+  - Basic network visualization
+
+**Stories This Enables**:
+- Shell company networks in financial investigations
+- Power broker identification in political stories
+- Criminal network mapping
+
+### Weeks 10-11: Building Public-Facing Data Tools
 **Core Question**: How do you let readers explore your investigation?
 → [Assignment](assignments.md#week-9-10-public-facing-tools) | [Readings](readings.md#week-9-10-building-public-facing-data-tools) | [Tech](tech-stack.md#data-tools--publishing)
 
@@ -204,7 +236,9 @@ The best data investigations don't just tell one story - they provide tools for 
 - Embed widgets for other newsrooms
 - API access for developers
 
-### Week 11-12: Document Intelligence at Scale
+**Quick Win**: "Your investigation tool is live on the internet"
+
+### Weeks 12-13: Document Intelligence at Scale
 **Core Question**: How do you make 100,000 documents searchable and explorable?
 → [Assignment](assignments.md#week-11-12-document-intelligence-at-scale) | [Readings](readings.md#week-11-12-document-intelligence-at-scale) | [Tech](tech-stack.md#ai--machine-learning)
 
@@ -230,9 +264,9 @@ You've received a massive FOIA dump: 100,000 PDFs from city emails, or thousands
     - Storing embeddings in Postgres (maybe pgvector if ambitious)
     - Finding similar documents without complex infrastructure
   - Practical tools
-    - NotebookLM* for initial exploration (always verify citations)
+    - NotebookLM* for initial exploration (easy to verify citations)
     - Local LLMs with LMStudio for sensitive documents
-    - Simple RAG patterns with Haystack or similar
+    - Simple RAG patterns with Haystack (Python)
 
 **Real Investigations**:
 - Quartz's Luanda Leaks (Portuguese documents made searchable in English)
@@ -250,7 +284,9 @@ You've received a massive FOIA dump: 100,000 PDFs from city emails, or thousands
 - pgvector for more advanced similarity search
 - Fine-tuning for specific journalism tasks
 
-### Week 13: Sustainability and Handoffs
+**Quick Win**: "AI just read 100 documents in 30 seconds"
+
+### Week 14: Sustainability and Handoffs
 **Core Question**: What happens to your data project after you publish?
 → [Assignment](assignments.md#week-13-sustainability) | [Readings](readings.md#week-13-sustainability-and-handoffs)
 

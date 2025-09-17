@@ -43,7 +43,7 @@
 - [Simon Willison's PG&E Outage Tracker](https://github.com/simonw/pge-outages) - 40,000+ commits tracking power outages
 - [COVID Tracking Project Methodology](https://covidtracking.com/about-data)
 
-## Week 7-8: Collaborative Investigation Infrastructure
+## Weeks 7-8: Collaborative Investigation Infrastructure
 
 ### Major Collaborations
 - [How We Built the Data Team Behind the Panama Papers (Source)](https://source.opennews.org/articles/how-we-built-data-team-behind-panama-papers/)
@@ -62,7 +62,19 @@
 - [ICIJ's Use of Graph Databases](https://neo4j.com/customer-stories/icij/)
 - [Linkurious and the Panama Papers](https://linkurious.com/blog/panama-papers-how-linkurious-enables-icij-to-investigate-the-massive-mossack-fonseca-leaks/)
 
-## Week 9-10: Building Public-Facing Data Tools
+## Week 9: Graph Databases and Network Analysis
+
+### Investigations Using Graphs
+- [ICIJ's Use of Graph Databases for Panama Papers](https://neo4j.com/customer-stories/icij/)
+- [Linkurious and the Panama Papers](https://linkurious.com/blog/panama-papers-how-linkurious-enables-icij-to-investigate-the-massive-mossack-fonseca-leaks/)
+- [Graph Databases in the Paradise Papers](https://neo4j.com/blog/analyzing-paradise-papers-neo4j/)
+
+### Technical Resources
+- [Neo4j Cypher Manual](https://neo4j.com/docs/cypher-manual/current/)
+- [Graph Databases for Journalists](https://neo4j.com/graph-databases-for-journalists/)
+- [Network Analysis in Investigations](https://www.bellingcat.com/resources/2022/12/01/a-beginners-guide-to-flight-tracking/)
+
+## Weeks 10-11: Building Public-Facing Data Tools
 
 ### ProPublica's Approach
 - [News Apps at ProPublica](https://datajournalism.com/read/handbook/one/delivering-data/news-apps-at-pro-publica)
@@ -80,7 +92,7 @@
 - [Observable Introduction to Data](https://observablehq.com/@observablehq/introduction-to-data) - Interactive notebooks
 - [The Markup's Blacklight: Building a Privacy Inspector](https://themarkup.org/blacklight/2020/09/22/how-we-built-a-real-time-privacy-inspector)
 
-## Week 11-12: Document Intelligence at Scale
+## Weeks 12-13: Document Intelligence at Scale
 
 ### Investigations Using AI
 - [How Quartz used AI to sort through the Luanda Leaks](https://qz.com/1786896/ai-for-investigations-sorting-through-the-luanda-leaks)
@@ -100,7 +112,7 @@
 - [investigate.ai: Machine Learning for LAPD Analysis](https://investigate.ai/) - Practical investigation examples
 - [Bellingcat's Geolocation Methodology](https://www.bellingcat.com/resources/how-tos/2023/05/08/finding-geolocation-leads-with-bellingcats-openstreetmap-search-tool/)
 
-## Week 13: Sustainability and Handoffs
+## Week 14: Sustainability and Handoffs
 
 ### Best Practices
 - [Data Journalism Sustainability Research](https://www.tandfonline.com/doi/full/10.1080/21670811.2018.1503060)

@@ -30,6 +30,13 @@ A comprehensive list of all technologies mentioned in the course curriculum, wit
 - **Week**: 3-4
 - **Why**: For truly massive datasets (mentioned as "know it exists")
 
+#### Neo4j
+- **Docs**: https://neo4j.com/docs/
+- **Cypher Tutorial**: https://neo4j.com/docs/cypher-manual/current/
+- **Neo4j Sandbox**: https://sandbox.neo4j.com/
+- **Week**: 9
+- **Why**: Graph database for entity relationships, network analysis
+
 ### Cloud Infrastructure
 
 #### Digital Ocean
@@ -57,7 +64,7 @@ A comprehensive list of all technologies mentioned in the course curriculum, wit
 - **Docs**: https://docs.github.com/en/actions
 - **Quickstart**: https://docs.github.com/en/actions/quickstart
 - **Python Guide**: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
-- **Week**: 5-6, 13
+- **Week**: 5-6, 14
 - **Why**: Automated scrapers, monitoring, scheduled updates
 
 #### Git
@@ -86,20 +93,20 @@ A comprehensive list of all technologies mentioned in the course curriculum, wit
 - **Docs**: https://flask.palletsprojects.com/
 - **Quickstart**: https://flask.palletsprojects.com/en/latest/quickstart/
 - **Tutorial**: https://flask.palletsprojects.com/en/latest/tutorial/
-- **Week**: 9-10
+- **Week**: 10-11
 - **Why**: Building public-facing data tools
 
 #### Render
 - **Homepage**: https://render.com/
 - **Docs**: https://render.com/docs
 - **Deploy Flask Guide**: https://render.com/docs/deploy-flask
-- **Week**: 9-10
+- **Week**: 10-11
 - **Why**: Simple, free deployment for Flask apps (easier than Heroku)
 
 #### Jinja2
 - **Docs**: https://jinja.palletsprojects.com/
 - **Tutorial**: https://jinja.palletsprojects.com/en/latest/intro/
-- **Week**: 9-10
+- **Week**: 10-11
 - **Why**: HTML templates for Flask
 
 ### Document Processing & Investigation
@@ -122,37 +129,37 @@ A comprehensive list of all technologies mentioned in the course curriculum, wit
 - **Docs**: https://platform.openai.com/docs
 - **Quickstart**: https://platform.openai.com/docs/quickstart
 - **Structured Outputs**: https://platform.openai.com/docs/guides/structured-outputs
-- **Week**: 11-12
+- **Week**: 12-13
 - **Why**: Entity extraction, embeddings
 
 #### Anthropic API
 - **Docs**: https://docs.anthropic.com/
 - **Getting Started**: https://docs.anthropic.com/claude/docs/getting-started
-- **Week**: 11-12
+- **Week**: 12-13
 - **Why**: Alternative for entity extraction, embeddings
 
 #### Google NotebookLM
 - **Platform**: https://notebooklm.google.com/
 - **Guide**: https://support.google.com/notebooklm
-- **Week**: 11-12
+- **Week**: 12-13
 - **Why**: Initial document exploration with citations
 
 #### LM Studio
 - **Download**: https://lmstudio.ai/
 - **Docs**: https://lmstudio.ai/docs
-- **Week**: 11-12
+- **Week**: 12-13
 - **Why**: Local LLMs for sensitive documents
 
 #### Haystack
 - **Docs**: https://docs.haystack.deepset.ai/
 - **Tutorial**: https://haystack.deepset.ai/tutorials/01_basic_qa_pipeline
-- **Week**: 11-12
+- **Week**: 12-13
 - **Why**: Simple RAG patterns
 
 #### pgvector
 - **Docs**: https://github.com/pgvector/pgvector
 - **Tutorial**: https://github.com/pgvector/pgvector/blob/master/README.md#getting-started
-- **Week**: 11-12 (if ambitious)
+- **Week**: 12-13 (if ambitious)
 - **Why**: Vector similarity search in Postgres
 
 ## Prerequisites (From Week 0)
