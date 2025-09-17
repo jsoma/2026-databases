@@ -16,27 +16,27 @@ Second-semester core course in the Columbia Journalism School Data Journalism MS
 ### By Week
 - **[Weeks 1-2](curriculum.md#weeks-1-2-working-with-large-government-databases)**: Large Government Databases (DuckDB, PostgreSQL)
     - "Look, you just queried 10 million rows on your laptop"
-    - [Assignment](assignments.md#weeks-1-2-large-government-databases) | [Readings](readings.md#week-1-2-working-with-large-government-databases) | [Tech](tech-stack.md#databases)
+    - [Assignment](assignments.md#weeks-1-2-large-government-databases) • [Readings](readings.md#week-1-2-working-with-large-government-databases) • [Tech](tech-stack.md#databases)
 - **[Weeks 3-4](curriculum.md#weeks-3-4-when-and-why-to-use-the-cloud)**: Cloud Infrastructure (Datasette Cloud, Backblaze B2, DigitalOcean)
     - "You just shared a giant database with zero configuration"
-    - [Assignment](assignments.md#weeks-3-4-cloud-infrastructure) | [Readings](readings.md#week-3-4-when-and-why-to-use-the-cloud) | [Tech](tech-stack.md#cloud-infrastructure)
+    - [Assignment](assignments.md#weeks-3-4-cloud-infrastructure) • [Readings](readings.md#week-3-4-when-and-why-to-use-the-cloud) • [Tech](tech-stack.md#cloud-infrastructure)
 - **[Weeks 5-6](curriculum.md#weeks-5-6-long-term-data-projects)**: Long-term data projects (GitHub Actions scrapers, versioning, documenting)
     - "Your scraper ran automatically while you slept"
-    - [Assignment](assignments.md#weeks-5-6-automation--scraping) | [Readings](readings.md#week-5-6-long-term-data-projects) | [Tech](tech-stack.md#automation--workflows)
+    - [Assignment](assignments.md#weeks-5-6-automation--scraping) • [Readings](readings.md#week-5-6-long-term-data-projects) • [Tech](tech-stack.md#automation--workflows)
 - **[Weeks 7-8](curriculum.md#weeks-7-8-collaborative-investigation-infrastructure)**: Collaborative Investigation (Aleph, DocumentCloud, Datasette)
     - "Cross-newroom, cross-border, cross-language, cross-everything investigations"
-    - [Assignment](assignments.md#weeks-7-8-collaborative-investigation-infrastructure) | [Readings](readings.md#weeks-7-8-collaborative-investigation-infrastructure) | [Tech](tech-stack.md#document-processing--investigation)
+    - [Assignment](assignments.md#weeks-7-8-collaborative-investigation-infrastructure) • [Readings](readings.md#weeks-7-8-collaborative-investigation-infrastructure) • [Tech](tech-stack.md#document-processing--investigation)
 - **[Week 9](curriculum.md#week-9-graph-databases)**: Graph Databases (Neo4j, Cypher)
     - "Connecting the dots of people and companies"
-    - [Assignment](assignments.md#week-9-graph-databases-and-network-analysis) | [Readings](readings.md#week-9-graph-databases-and-network-analysis) | [Tech](tech-stack.md#databases)
+    - [Assignment](assignments.md#week-9-graph-databases-and-network-analysis) • [Readings](readings.md#week-9-graph-databases-and-network-analysis) • [Tech](tech-stack.md#databases)
 - **[Weeks 10-11](curriculum.md#weeks-10-11-building-public-facing-data-tools)**: Public-Facing Tools (Flask, Jinja2, render.com)
     - "Your investigation tool is live on the internet"
-    - [Assignment](assignments.md#weeks-10-11-public-facing-tools) | [Readings](readings.md#weeks-10-11-building-public-facing-data-tools) | [Tech](tech-stack.md#data-tools--publishing)
+    - [Assignment](assignments.md#weeks-10-11-public-facing-tools) • [Readings](readings.md#weeks-10-11-building-public-facing-data-tools) • [Tech](tech-stack.md#data-tools--publishing)
 - **[Weeks 12-13](curriculum.md#weeks-12-13-document-intelligence-at-scale)**: AI Document Processing (LLMs via API, NotebookLM, LM Studio)
     - "AI just read 100 documents in 30 seconds"
-    - [Assignment](assignments.md#weeks-12-13-ai-document-processing) | [Readings](readings.md#weeks-12-13-document-intelligence-at-scale) | [Tech](tech-stack.md#ai--machine-learning)
+    - [Assignment](assignments.md#weeks-12-13-ai-document-processing) • [Readings](readings.md#weeks-12-13-document-intelligence-at-scale) • [Tech](tech-stack.md#ai--machine-learning)
 - **[Week 14](curriculum.md#week-14-sustainability-and-handoffs)**: Sustainability & Handoffs (GitHub Actions, Documentation)
-    - [Assignment](assignments.md#week-14-sustainability--handoffs) | [Readings](readings.md#week-14-sustainability-and-handoffs)
+    - [Assignment](assignments.md#week-14-sustainability--handoffs) • [Readings](readings.md#week-14-sustainability-and-handoffs)
 
 ## Getting Started
 
