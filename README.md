@@ -1,6 +1,8 @@
-# Data and Databases Curriculum
+# Data and Databases Curriculum Revamp
 
 Second-semester core course in the Columbia Journalism School Data Journalism MS program. This course teaches students to work with datasets that require more than pandas and a laptop - government databases with millions of records, document dumps from investigations, and long-term data projects that multiple journalists need to access.
+
+> Under active development and so, so, so much of the writing is lazily done via Claude Code. Have I verified that any of these investigations it's talking about exist? *Absolutely not!*
 
 ## Course Materials
 

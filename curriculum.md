@@ -1,4 +1,4 @@
-# Data and Databases Curriculum revamp
+# Data and Databases Curriculum
 
 Data and Databases is a second-semester core course in the Columbia Journalism School Data Journalism MS. After a first semester spend learning both writing/reporting skills and fundamental Python data journalism skills (scraping, pandas, etc) students move into more advanced possibilities with larger datasets.
 
