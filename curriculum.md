@@ -171,7 +171,8 @@ Big investigations require teamwork. During the Panama Papers, hundreds of journ
 
 **Nice-to-Haves**:
 - Entity resolution across datasets
-- Secure drop integration
+
+**Quick Win**: "Cross-newroom, cross-border, cross-language, cross-everything investigations"
 
 ### Week 9: Graph Databases and Network Analysis
 **Core Question**: How do you find hidden connections in complex networks?
@@ -198,6 +199,8 @@ Major investigations often involve complex networks of people, companies, and tr
 - Shell company networks in financial investigations
 - Power broker identification in political stories
 - Criminal network mapping
+
+**Quick Win**: "Connecting the dots of people and companies"
 
 ### Weeks 10-11: Building Public-Facing Data Tools
 **Core Question**: How do you let readers explore your investigation?
