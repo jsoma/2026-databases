@@ -1,65 +1,85 @@
-# Data and Databases Curriculum Revamp
+# Data and Databases
 
-Second-semester core course in the Columbia Journalism School Data Journalism MS program. This course teaches students to work with datasets that require more than pandas and a laptop - government databases with millions of records, document dumps from investigations, and long-term data projects that multiple journalists need to access.
+Third-semester core course in the Columbia Journalism School Data Journalism MS program. This course teaches students to work with datasets that require more than pandas and a laptop — government databases with millions of records, document dumps from real investigations, and long-term data projects that multiple journalists can access — and to publish what they find as journalism.
 
-> Under active development and so, so, so much of the writing is lazily done via Claude Code. Have I verified that any of these investigations it's talking about exist? *Absolutely not!*
+The course follows the ProPublica model: acquire a significant dataset, analyze it thoroughly over time, and build public-facing tools that both tell a story and let readers explore the data themselves. AI tooling now covers most scraping, so the spine of the course is databases proper — acquiring, querying, verifying, and publishing — with an investigation-shaped question at the center of every week.
+
+> **Status:** This is the v3 design after a structured review and iteration cycle (May 2026). Methodology citations have been verified. The full design rationale is in `design-notes.md`; the canonical syllabus reference is `instructor-notes.md`.
 
 ## Course Materials
 
 ### Core Materials
-- **📚 [Curriculum](curriculum.md)**: Week-by-week topics, concepts, and skills
-- **📝 [Assignments](assignments.md)**: Progressive exercises with Foundation/Extension/Innovation tiers
-- **🔧 [Tech Stack](tech-stack.md)**: All tools and technologies with documentation links
-- **📖 [Readings](readings.md)**: Investigations and methodologies for each week
-- **🏃 [Speed Run](speed-run.md)**: Self-study guide for learning the tech stack
+- **[Curriculum](curriculum.md)** — week-by-week topics, concepts, and skills
+- **[Assignments](assignments.md)** — Foundation / Extension / Innovation tiers, plus methodology-as-journalism deliverables
+- **[Tech Stack](tech-stack.md)** — all tools and technologies with documentation links
+- **[Readings](readings.md)** — investigations and methodologies for each week, verified May 2026
+- **[Speed Run](speed-run.md)** — self-study guide for learning the tech stack independently
+
+### Design References
+- **[Instructor Notes](instructor-notes.md)** — comprehensive design reference: Must/Should/Nice outcomes, recurring threads, pre-semester checklist
+- **[Design Notes](design-notes.md)** — decision rationale, rejections, open items
+- **[Readings Sweep](readings-sweep.md)** — verification audit (KEEP / FIX / CUT / ADD)
 
 ## Quick Navigation
 
 ### By Week
 
-#### **[Weeks 1-2](curriculum.md#weeks-1-2-working-with-large-government-databases): Large, Large Databases**
+#### **[Week 1](curriculum.md#week-1-sql-via-question-families--duckdb): SQL via Question Families + DuckDB**
+- "You just queried 10 million rows on your laptop"
+- DuckDB, SQL basics, question families
+- [Assignment](assignments.md#week-1-sql-via-question-families--duckdb) • [Readings](readings.md#week-1-sql-via-question-families--duckdb) • [Tech](tech-stack.md#databases)
 
-- "Look, you just queried 10 million rows on your laptop"
-- DuckDB, PostgreSQL
-- [Assignment](assignments.md#weeks-1-2-large-government-databases) • [Readings](readings.md#week-1-2-working-with-large-government-databases) • [Tech](tech-stack.md#databases)
+#### **[Week 2](curriculum.md#week-2-joins-dirty-data-and-domain-checking): JOINs, Dirty Data, Domain Checking**
+- "You found three bugs in queries you didn't write"
+- Multi-table joins, HMDA gotchas, AI-generated SQL verification
+- [Assignment](assignments.md#week-2-joins-dirty-data-and-domain-checking) • [Readings](readings.md#week-2-joins-dirty-data-and-domain-checking) • [Tech](tech-stack.md#databases)
 
-**[Weeks 3-4](curriculum.md#weeks-3-4-when-and-why-to-use-the-cloud): Cloud Infrastructure**
+#### **[Week 3](curriculum.md#week-3-cloud-as-access): Cloud as Access**
+- "You just shared a database with zero configuration"
+- Datasette, Backblaze B2, cost reasoning
+- [Assignment](assignments.md#week-3-cloud-as-access) • [Readings](readings.md#week-3-cloud-as-access) • [Tech](tech-stack.md#cloud-infrastructure)
 
-- "You just shared a giant database with zero configuration"
-- Datasette Cloud, Backblaze B2, DigitalOcean
-- [Assignment](assignments.md#weeks-3-4-cloud-infrastructure) • [Readings](readings.md#week-3-4-when-and-why-to-use-the-cloud) • [Tech](tech-stack.md#cloud-infrastructure)
-
-#### **[Weeks 5-6](curriculum.md#weeks-5-6-long-term-data-projects): Long-term data projects**
+#### **[Week 4](curriculum.md#week-4-long-term-tracking--build-the-bill-scraper): Long-term Tracking — Build the Bill Scraper**
 - "Your scraper ran automatically while you slept"
-- GitHub Actions scrapers, versioning, documenting
-- [Assignment](assignments.md#weeks-5-6-automation--scraping) • [Readings](readings.md#week-5-6-long-term-data-projects) • [Tech](tech-stack.md#automation--workflows)
+- GitHub Actions, git-scraping, change detection
+- [Assignment](assignments.md#week-4-long-term-tracking--build-the-bill-scraper) • [Readings](readings.md#week-4-long-term-tracking--build-the-bill-scraper) • [Tech](tech-stack.md#automation--workflows)
 
-#### **[Weeks 7-8](curriculum.md#weeks-7-8-collaborative-investigation-infrastructure): Collaborative Investigation**
+#### **[Week 5](curriculum.md#week-5-how-data-gets-acquired-and-grows-over-time): How Data Gets Acquired and Grows Over Time**
+- "You've heard from someone who actually does this for a living"
+- FOIA, scraping, leaks; long-term tracking craft; guest speaker
+- [Assignment](assignments.md#week-5-how-data-gets-acquired-and-grows-over-time) • [Readings](readings.md#week-5-how-data-gets-acquired-and-grows-over-time)
 
-- "Cross-newroom, cross-border, cross-language, cross-everything investigations"
-- OpenAleph, DocumentCloud, Datasette
-- [Assignment](assignments.md#weeks-7-8-collaborative-investigation-infrastructure) • [Readings](readings.md#weeks-7-8-collaborative-investigation-infrastructure) • [Tech](tech-stack.md#document-processing--investigation)
+#### **[Week 6](curriculum.md#week-6-openaleph--collaborative-investigation-infrastructure): OpenAleph — Collaborative Investigation Infrastructure**
+- "Cross-newsroom, cross-border, cross-language, cross-everything investigations"
+- OpenAleph public instance, FollowTheMoney ontology, entity graph thinking
+- [Assignment](assignments.md#week-6-openaleph--collaborative-investigation-infrastructure) • [Readings](readings.md#week-6-openaleph--collaborative-investigation-infrastructure) • [Tech](tech-stack.md#document-processing--investigation)
 
-#### **[Week 9](curriculum.md#week-9-graph-databases): Graph Databases**
+#### **[Week 7](curriculum.md#week-7-self-hosted-aleph--ingest-your-own-data): Self-hosted Aleph + Ingest Your Own Data**
+- "You traced an LLC to a person"
+- NYC building ownership, Docker OpenAleph, FtM CSV mapping
+- [Assignment](assignments.md#week-7-self-hosted-aleph--ingest-your-own-data) • [Readings](readings.md#week-7-self-hosted-aleph--ingest-your-own-data) • [Tech](tech-stack.md#document-processing--investigation)
 
+#### **[Week 8](curriculum.md#week-8-networks-for-investigations-cypher): Networks for Investigations (Cypher)**
 - "Connecting the dots of people and companies"
-- Neo4j, Cypher
-- [Assignment](assignments.md#week-9-graph-databases-and-network-analysis) • [Readings](readings.md#week-9-graph-databases-and-network-analysis) • [Tech](tech-stack.md#databases)
+- Neo4j Sandbox, Cypher pattern matching, path tracing
+- [Assignment](assignments.md#week-8-networks-for-investigations-cypher) • [Readings](readings.md#week-8-networks-for-investigations-cypher) • [Tech](tech-stack.md#databases)
 
-#### **[Weeks 10-11](curriculum.md#weeks-10-11-building-public-facing-data-tools): Public-Facing Tools**
+#### **[Week 9](curriculum.md#week-9-build-a-baby-aleph--extraction--fuzzy-matching--linking): Build a Baby Aleph**
+- "You measured how good AI was at finding duplicates"
+- Anthropic structured outputs, rapidfuzz, dedupe, comparison framework
+- [Assignment](assignments.md#week-9-build-a-baby-aleph--extraction--fuzzy-matching--linking) • [Readings](readings.md#week-9-build-a-baby-aleph--extraction--fuzzy-matching--linking) • [Tech](tech-stack.md#ai--machine-learning)
 
-- "Your investigation tool is live on the internet"
-- Flask, Jinja2, render.com
-- [Assignment](assignments.md#weeks-10-11-public-facing-tools) • [Readings](readings.md#weeks-10-11-building-public-facing-data-tools) • [Tech](tech-stack.md#data-tools--publishing)
+#### **[Week 10](curriculum.md#week-10-public-facing-tools--security--privacy--methodology): Public-Facing Tools + Security + Privacy + Methodology**
+- "Your investigation tool is live on the internet — and you know what it would leak"
+- Flask + SQLite + Render, security audit, methodology page
+- [Assignment](assignments.md#week-10-public-facing-tools--security--privacy--methodology) • [Readings](readings.md#week-10-public-facing-tools--security--privacy--methodology) • [Tech](tech-stack.md#data-tools--publishing)
 
-#### **[Weeks 12-13](curriculum.md#weeks-12-13-document-intelligence-at-scale): AI Document Processing**
+#### **[Week 11](curriculum.md#week-11-ai-extraction-at-depth--multilingual): AI Extraction at Depth + Multilingual**
+- "AI just read 100 documents in 30 seconds — and you know which ones it got wrong"
+- Structured outputs at scale, multilingual extraction, collaborative verification
+- [Assignment](assignments.md#week-11-ai-extraction-at-depth--multilingual) • [Readings](readings.md#week-11-ai-extraction-at-depth--multilingual) • [Tech](tech-stack.md#ai--machine-learning)
 
-- "AI just read 100 documents in 30 seconds"
-- LLMs via API, NotebookLM, LM Studio
-- [Assignment](assignments.md#weeks-12-13-ai-document-processing) • [Readings](readings.md#weeks-12-13-document-intelligence-at-scale) • [Tech](tech-stack.md#ai--machine-learning)
-
-#### **[Week 14](curriculum.md#week-14-sustainability-and-handoffs): Sustainability & Handoffs**
-
-- "You're free!"
-- GitHub Actions, Documentation
-- [Assignment](assignments.md#week-14-sustainability--handoffs) • [Readings](readings.md#week-14-sustainability-and-handoffs)
+#### **[Week 12](curriculum.md#week-12-methodology-article--bill-tracker-harvest--sustainability): Methodology + Bill Harvest + Sustainability**
+- "You shipped a tool, a story, and a methodology — and your scraper is still running"
+- Methodology-as-journalism, longitudinal harvest, sustainability planning
+- [Assignment](assignments.md#week-12-methodology-article--bill-tracker-harvest--sustainability) • [Readings](readings.md#week-12-methodology-article--bill-tracker-harvest--sustainability)

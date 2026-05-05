@@ -1,249 +1,359 @@
 # Speed-Run Guide: Data and Databases for Journalism
 
-A self-study guide to learn the complete data journalism tech stack through hands-on projects and real investigations.
+A hands-on walkthrough of the complete tech stack for the Data and Databases course. Each section pairs context reading with technical work and a small investigation, so you build operational fluency with every tool — DuckDB through OpenAleph through AI extraction.
+
+The full week-by-week curriculum is in `curriculum.md`; this guide compresses the same material into a tighter format you can work through end-to-end.
 
 ## Prerequisites
 
 ### Python and pandas basics
-Load any CSV, do a groupby operation. If you need a refresher: [10 minute pandas guide](https://pandas.pydata.org/docs/user_guide/10min.html)
+Load any CSV; do a groupby. Refresher: [10-minute pandas guide](https://pandas.pydata.org/docs/user_guide/10min.html).
 
-### Git fundamentals  
-Clone a repo, make changes, commit them. If you need a refresher: [GitHub Desktop tutorial](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop)
+### Git fundamentals
+Clone a repo, make changes, commit. Refresher: [GitHub Desktop tutorial](https://docs.github.com/en/desktop/contributing-and-collaborating-using-github-desktop).
 
 ### Command line basics
-Navigate directories, run Python scripts. If you need a refresher: [Command line crash course](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Understanding_client-side_tools/Command_line)
+Navigate directories, run Python scripts. Refresher: [Command line crash course](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Understanding_client-side_tools/Command_line).
 
-## Week 1-2: Large Local Databases
+### AI coding tools
+Have a working setup with Claude Code, Cursor, or similar. The course assumes you'll reach for AI for query writing, scaffolding, and debugging — and will teach you when not to trust it.
+
+---
+
+## Week 1-2: SQL via Question Families + DuckDB
 
 ### Context Reading
-Read [ProPublica's Dollars for Docs methodology](https://projects.propublica.org/docdollars/) and skim [Tips for Building a Database for Investigations](https://gijn.org/resource/tips-for-building-a-database-for-investigations/).
+[ProPublica's Dollars for Docs methodology](https://www.propublica.org/article/about-the-dollars-for-docs-data) (historical), [Tips for Building a Database for Investigations (GIJN)](https://gijn.org/resource/tips-for-building-a-database-for-investigations/), and the [Reveal "Kept Out" Pulitzer page](https://www.pulitzer.org/finalists/aaron-glantz-and-emmanuel-martinez-reveal-center-investigative-reporting-emeryville-calif).
 
 ### Learn the Tech
 
 #### DuckDB Basics
-Install with `pip install duckdb`. Follow the [DuckDB Python API quickstart](https://duckdb.org/docs/api/python/overview). Download [PPP loan data sample](https://data.sba.gov/dataset/ppp-foia) (just one state) and try this:
-   ```python
-   import duckdb
-   conn = duckdb.connect()
-   # Query CSV directly without loading into memory!
-   result = conn.execute("SELECT * FROM 'ppp_data.csv' WHERE LoanAmount > 1000000").fetchdf()
-   ```
+Install with `pip install duckdb`. Follow the [DuckDB Python guide](https://duckdb.org/docs/current/guides/overview). Download an HMDA county slice from [CFPB](https://ffiec.cfpb.gov/data-publication/) and try:
+```python
+import duckdb
+conn = duckdb.connect()
+# Query CSV directly without loading into memory
+result = conn.execute("""
+  SELECT action_taken, COUNT(*) AS n
+  FROM 'hmda_county.csv'
+  GROUP BY action_taken
+  ORDER BY n DESC
+""").fetchdf()
+```
 
-#### Transition to Postgres
-Install [Postgres.app](https://postgresapp.com/) (Mac) or [PostgreSQL](https://www.postgresql.org/download/). Follow the [PostgreSQL tutorial](https://www.postgresqltutorial.com/). Import that same PPP data into Postgres:
-   ```bash
-   createdb ppp_analysis
-   psql ppp_analysis -c "CREATE TABLE loans (...);"
-   # Use DuckDB to export to Postgres
-   ```
+#### Question Families
+Before writing more queries, learn the twelve question families (see `curriculum.md`). For your county slice, pose one question from each of: counts, rates, distributions, peer comparisons, tail analysis, geographic patterns, change detection, negation/absence, and reconciliation. Have AI write each query. Sanity-check each result.
 
-#### Command-line alternatives
-Install xsv with `brew install xsv` or download from [GitHub](https://github.com/BurntSushi/xsv). Try `xsv stats ppp_data.csv | xsv table` for instant statistics on any CSV.
+#### JOINs and HMDA Gotchas
+Pull lender info and Census tract demographics. Try a 3-table JOIN. Then read the [HMDA action_taken interpretations](https://www.consumerfinance.gov/rules-policy/regulations/1003/interp-4/) and [NCRC's race/ethnicity methodology](https://ncrc.org/ncrcs-hmda-2018-methodology-how-to-calculate-race-and-ethnicity/). Now go back to your queries — what would a domain-naive AI-written version get wrong?
+
+#### Postgres When You Outgrow It
+Install [Postgres.app](https://postgresapp.com/) or [PostgreSQL](https://www.postgresql.org/download/). Use the [DuckDB Postgres extension](https://duckdb.org/docs/current/core_extensions/postgres) to push your cleaned dataset into Postgres for sharing.
 
 ### Practice Investigation
-Download HMDA mortgage data for one county from [CFPB](https://ffiec.cfpb.gov/data-publication/). Use DuckDB to find top 10 lenders by volume, denial rates by race, and average loan amounts by census tract.
+Use HMDA data for one county to ask a redlining-style question requiring a 3-table JOIN. Verify your work — row counts, sanity check against published CFPB totals — and write up what you found in 300 words.
 
-## Week 3-4: Cloud Infrastructure
+---
+
+## Week 3: Cloud as Access
 
 ### Context Reading
-[How BuzzFeed Found Spy Planes](https://www.cjr.org/watchdog/how-buzzfeed-news-revealed-hidden-spy-planes-in-us-airspace.php) and [The Markup's Blacklight infrastructure](https://themarkup.org/blacklight/2020/09/22/how-we-built-a-real-time-privacy-inspector).
+[Heart of Nerd Darkness (ProPublica)](https://www.propublica.org/nerds/heart-of-nerd-darkness-why-the-dollars-for-docs-data-is-so-difficult), [How BuzzFeed Found Spy Planes (CJR)](https://www.cjr.org/watchdog/how-buzzfeed-news-revealed-hidden-spy-planes-in-us-airspace.php), [The Markup's Blacklight](https://themarkup.org/blacklight/2020/09/22/how-we-built-a-real-time-privacy-inspector).
 
 ### Learn the Tech
 
-#### Quick Win: Datasette Cloud
-Start with [Datasette Cloud](https://datasette.cloud/) - upload your SQLite database and instantly share it with collaborators. No setup required, free tier available. This is the fastest way to understand cloud benefits.
+#### Datasette for Sharing
+Install with `pip install datasette`. Convert a SQLite database to a published instance:
+```bash
+sqlite-utils insert hmda.db loans hmda_county.csv --csv
+datasette serve hmda.db
+```
+For sharing without local infrastructure, try [Datasette Cloud](https://datasette.cloud/) with a free trial.
 
-#### Cloud Storage for Files
-When you have many documents (PDFs, images, data files) to share with a team, use [Backblaze B2](https://www.backblaze.com/b2/). It's simpler than AWS S3 and much cheaper:
-   ```python
-   import boto3
-   s3 = boto3.client('s3',
-       endpoint_url='https://s3.us-west-002.backblazeb2.com',
-       aws_access_key_id='your_key',
-       aws_secret_access_key='your_secret')
-   # Upload investigation documents
-   s3.upload_file('document.pdf', 'investigation-bucket', 'docs/document.pdf')
-   ```
+#### Backblaze B2 for Documents
+B2 is simpler and cheaper than S3. With its S3-compatible endpoint, boto3 works as-is:
+```python
+import boto3
+s3 = boto3.client('s3',
+    endpoint_url='https://s3.us-west-002.backblazeb2.com',
+    aws_access_key_id='your_key',
+    aws_secret_access_key='your_secret')
+s3.upload_file('document.pdf', 'investigation-bucket', 'docs/document.pdf')
+```
 
-#### Shared Database Access
-Create a managed Postgres instance on DigitalOcean ($15/month). Instead of psql, use [TablePlus](https://tableplus.com/) for a friendly GUI. Import your local PPP data, then share read-only credentials with collaborators.
+#### Cost Reasoning
+Estimate the order-of-magnitude cost of a 6-month investigation: 5TB of documents + 3 reporters with continuous access. Show your work. Aim for $X-not-$Y precision, not exact numbers.
 
 ### Practice Investigation
-Upload a SQLite database to Datasette Cloud. Share the link with someone else. Both query the same data simultaneously without any setup on their end.
+Publish an HMDA exploration to Datasette. Share the link with a partner playing "editor in DC." Both query the same data simultaneously without setup on their end. Estimate what 6 months of this would cost.
 
-## Week 5-6: Automation & Long-term Projects
+---
+
+## Week 4-5: Long-term Tracking + Data Acquisition
 
 ### Context Reading
-[Git scraping explained](https://simonwillison.net/2021/Mar/5/git-scraping/) and browse [Simon's PG&E scraper](https://github.com/simonw/pge-outages) with 40,000+ commits tracking power outages.
+[Git scraping (Simon Willison, 2021)](https://simonwillison.net/2021/Mar/5/git-scraping/), the [PG&E outages tracker](https://github.com/simonw/pge-outages), [WaPo Fatal Force methodology](https://www.washingtonpost.com/investigations/2022/12/05/washington-post-fatal-police-shootings-methodology/).
 
 ### Learn the Tech
 
-#### GitHub Actions Basics
-Follow the [GitHub Actions quickstart](https://docs.github.com/en/actions/quickstart). Create a workflow that runs daily:
-   ```yaml
-   name: Daily scraper
-   on:
-     schedule:
-       - cron: '0 12 * * *'  # Noon daily
-   jobs:
-     scrape:
-       runs-on: ubuntu-latest
-       steps:
-         - uses: actions/checkout@v2
-         - run: python scrape.py
-         - run: |
-             git add data.csv
-             git commit -m "Update data"
-             git push
-   ```
+#### GitHub Actions for Scheduled Scraping
+Follow the [GitHub Actions quickstart](https://docs.github.com/en/actions/quickstart). A workflow that runs daily:
+```yaml
+name: Daily scraper
+on:
+  schedule:
+    - cron: '0 12 * * *'  # noon UTC daily
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: python scrape.py
+      - run: |
+          git config user.name "Scraper"
+          git config user.email "scraper@example.com"
+          git add data/
+          git diff --cached --quiet || git commit -m "Update $(date)"
+          git push
+```
 
 #### Change Detection
-Build a simple Python script that compares yesterday's data to today's. Use git diff to see what changed. Track a government webpage daily and alert when it changes.
+A simple diff isn't enough. Build logic that surfaces *meaningful* change — new bills, status changes, vote outcomes — not just timestamp drift. Generate a daily changelog.
+
+#### Data Acquisition Modes
+Most scale data acquisition is one of: bulk download of public data, FOIA for non-public, leaks, or build-it-yourself via scraping. Long-term tracking projects often combine modes. Sketch out where you'd get a hypothetical large dataset for a story you care about — what's public, what would need a request, what's only available by ongoing scraping?
 
 ### Practice Investigation
-Pick a government data source that updates regularly (COVID data, crime stats, etc.). Build a GitHub Action that downloads the data daily, compares to yesterday, commits changes to git, and creates an issue if something significant changed.
+Pick a state legislative bill database. Build a GitHub Actions scraper that runs daily, commits changes to git, and notifies you when it breaks. Let it run for several weeks. Then come back and analyze what's accumulated — apply the question families to your longitudinal data.
 
-## Weeks 7-8: Collaborative Investigation
+---
+
+## Week 6-7: Collaborative Investigation Infrastructure (OpenAleph)
 
 ### Context Reading
-[How ICIJ coordinated Panama Papers](https://www.icij.org/investigations/panama-papers/) and [Inside Cyprus Confidential methodology](https://www.icij.org/investigations/cyprus-confidential/leaked-data-journalism-methodology/).
+[ICIJ Cyprus Confidential methodology](https://www.icij.org/investigations/cyprus-confidential/leaked-data-journalism-methodology/), [How ICIJ Deals with Massive Data Leaks](https://datajournalism.com/read/handbook/two/working-with-data/how-icij-deals-with-huge-data-dumps-like-the-panama-and-paradise-papers), [How We Built the Data Team Behind the Panama Papers](https://source.opennews.org/articles/how-we-built-data-team-behind-panama-papers/).
 
 ### Learn the Tech
 
-#### Datasette for Exploration
-Install with `pip install datasette`. Follow [Datasette getting started](https://docs.datasette.io/en/stable/getting_started.html). Convert your PPP database to SQLite and publish with Datasette:
-   ```bash
-   # Convert CSV to SQLite
-   sqlite-utils insert ppp.db loans ppp_data.csv --csv
-   # Launch Datasette
-   datasette serve ppp.db
-   ```
+#### OpenAleph Public Instance
+Browse the [OCCRP public Aleph instance](https://aleph.occrp.org/) — Companies House, sanctions lists, ICIJ Offshore Leaks entity graphs. Note: OCCRP is sunsetting active maintenance after Dec 2025; [OpenAleph](https://openaleph.org/) is the going-forward fork.
 
-#### Document Processing Overview
-Explore [DocumentCloud](https://www.documentcloud.org/) by creating a free account. Upload a few PDFs and try the annotation features. Look at the [Aleph demo instance](https://aleph.occrp.org/) (read-only) to understand how large-scale document processing works.
+Pick a name (politician, real-estate developer, contractor) and search across datasets. The same `Person` may appear in sanctions, Companies House, and Offshore Leaks — that's the cross-dataset hit.
+
+#### FollowTheMoney (FtM) Ontology
+Read the [FtM project page](https://followthemoney.tech/). FtM is the schema that makes everything joinable: `Person`, `Company`, `Directorship`, `Vessel`, `Payment`. Once you understand FtM, you understand why Aleph isn't just a search engine — it's a graph that emerges from documents you never tagged.
+
+#### Self-hosted OpenAleph + FtM CSV Mapping
+For a learning exercise, run OpenAleph in Docker. Map a CSV (e.g., NYC ACRIS deeds) into FtM types using `ftm map` and ingest. Review what the automatic entity resolution caught and what it missed.
+
+#### DocumentCloud (alternative)
+For smaller, US-focused document sets, [DocumentCloud](https://www.documentcloud.org/) has lower friction. Upload a few PDFs and try the annotation features. Use this when Aleph would be overkill.
 
 ### Practice Investigation
-Take your PPP loan database, publish it with Datasette, create saved queries for common questions, and share with a colleague for exploration.
+Pick an entity related to a story you care about. Cross-reference across the public OCCRP instance — Companies House, sanctions, Offshore Leaks. Then ingest a small dataset of your own (city deeds, contract filings) into a self-hosted OpenAleph and write a "who owns this" memo for one specific case.
 
-## Week 9: Graph Databases
+---
+
+## Week 8: Networks for Investigations (Cypher)
 
 ### Context Reading
-[ICIJ's Use of Graph Databases](https://neo4j.com/customer-stories/icij/) and [Linkurious Panama Papers visualization](https://linkurious.com/blog/panama-papers-how-linkurious-enables-icij-to-investigate-the-massive-mossack-fonseca-leaks/).
+[ICIJ's Use of Graph Databases](https://neo4j.com/customer-stories/icij/), [Linkurious Panama Papers visualization](https://linkurious.com/blog/panama-papers-how-linkurious-enables-icij-to-investigate-the-massive-mossack-fonseca-leaks/), [GIJN: How They Did It — Paradise Papers](https://gijn.org/stories/paradise-papers/).
 
 ### Learn the Tech
 
-#### Neo4j Basics
-Set up [Neo4j Sandbox](https://sandbox.neo4j.com/) (free, no install). Follow the [Cypher tutorial](https://neo4j.com/docs/cypher-manual/current/). Create a network of people, companies, and transactions:
-   ```cypher
-   CREATE (p:Person {name: 'John Doe'})
-   CREATE (c:Company {name: 'Shell Corp'})
-   CREATE (p)-[:OWNS]->(c)
-   ```
+#### Neo4j Sandbox
+Set up a [Neo4j Sandbox](https://sandbox.neo4j.com/) — free, browser-based, no install. Follow the [Cypher manual](https://neo4j.com/docs/cypher-manual/current/) for basic pattern matching. A small graph:
+```cypher
+CREATE (p:Person {name: 'John Doe'})
+CREATE (c:Company {name: 'Shell Corp'})
+CREATE (p)-[:OWNS]->(c)
+```
 
-#### Network Analysis
-Find shortest paths, most connected nodes, and circular flows. Export visualizations for stories.
+#### Pattern Matching for Path Tracing
+The graph-shaped question:
+```cypher
+MATCH path = (p:Person {name: 'Politician'})-[*..4]-(c:Company)
+WHERE c.is_sanctioned = true
+RETURN path
+```
+"Find every path of length up to 4 between this politician and any sanctioned company."
+
+Don't go deep on Cypher syntax. The skill is recognizing when the question shape is graph-shaped.
 
 ### Practice Investigation
-Load investigation data with entities and relationships. Find hidden connections between politicians and companies through shell corporations.
+Load the entity export from your Week 7 Aleph work plus a slice of the public ICIJ Offshore Leaks entity graph. Pose one question that's graph-shaped — typically a path between two entities through some number of intermediate connections. Trace it. Write up what additional data would verify the connection.
 
-## Weeks 10-11: Public-Facing Tools
+---
+
+## Week 9: Build a Baby Aleph
 
 ### Context Reading
-Explore [ProPublica's Nonprofit Explorer](https://projects.propublica.org/nonprofits/), [Texas Tribune Salaries](https://salaries.texastribune.org/), and [ProPublica's News App guides](https://github.com/propublica/guides).
+[Pandora Papers: Technology Behind the Investigation](https://linkurious.com/blog/technology-pandora-papers-investigation/) — what big tools do.
 
 ### Learn the Tech
 
-#### Flask Basics
-Follow the [Flask quickstart](https://flask.palletsprojects.com/en/latest/quickstart/). Build a simple search interface:
-   ```python
-   from flask import Flask, render_template, request
-   import psycopg2
-   
-   app = Flask(__name__)
-   
-   @app.route('/')
-   def search():
-       query = request.args.get('q')
-       if query:
-           # Search database
-           conn = psycopg2.connect("...")
-           cur = conn.cursor()
-           cur.execute("SELECT * FROM loans WHERE borrower ILIKE %s", (f'%{query}%',))
-           results = cur.fetchall()
-           return render_template('results.html', results=results)
-       return render_template('search.html')
-   ```
+#### AI Entity Extraction (Structured Outputs)
+Get an Anthropic or OpenAI API key (a few dollars covers the exercise). Follow [structured outputs documentation](https://platform.openai.com/docs/guides/structured-outputs). Extract entities from a document set into a defined JSON schema:
+```python
+from anthropic import Anthropic
+client = Anthropic()
+# Force the response into a strict JSON schema
+```
 
-#### Jinja2 Templates
-Create basic HTML templates with Jinja2. Add pagination, filters, and CSV download functionality.
+#### rapidfuzz for Fuzzy Matching
+Install `pip install rapidfuzz`. Try string similarity on names with known duplicates:
+```python
+from rapidfuzz import fuzz
+fuzz.ratio("Robert Izsak", "R. Izsak")  # 75
+fuzz.ratio("Izsak Realty LLC", "Izsak Realty LLC c/o J Smith")  # 86
+```
+
+#### dedupe for Record Linkage
+For larger entity-resolution problems, [dedupe](https://docs.dedupe.io/en/latest/) does active-learning record linkage — you label a few pairs, it learns the rest.
 
 ### Practice Investigation
-Build a simple public-facing tool for your PPP data with search by company name, filter by loan amount ranges, CSV download, and deployment to Heroku free tier or GitHub Pages.
+Take a document set with known entity duplicates. Run entity resolution three ways:
+1. AI structured outputs
+2. rapidfuzz
+3. dedupe (or your earlier OpenAleph result if you have one)
 
-## Weeks 12-13: AI Document Processing
+Measure each against ground-truth labels. Write up which approach won where, and why.
+
+---
+
+## Week 10: Public-Facing Tools + Security + Privacy + Methodology
 
 ### Context Reading
-[How Quartz used AI for Luanda Leaks](https://qz.com/1786896/ai-for-investigations-sorting-through-the-luanda-leaks) and [BuzzFeed FinCEN Files methodology](https://www.buzzfeednews.com/article/jsvine/fincen-files-explainer-data-money-transactions).
+[ProPublica's Nonprofit Explorer](https://projects.propublica.org/nonprofits/), [Texas Tribune Salaries](https://salaries.texastribune.org/), [ProPublica's News App Guides](https://www.propublica.org/nerds/propublicas-news-app-guides), [The Markup's Show Your Work](https://themarkup.org/series/show-your-work), [ProPublica COMPAS methodology](https://www.propublica.org/article/how-we-analyzed-the-compas-recidivism-algorithm).
 
 ### Learn the Tech
 
-#### NotebookLM for Exploration
-Upload documents to [NotebookLM](https://notebooklm.google.com/). Ask questions and note how it cites sources. Upload 10 government reports and ask investigative questions.
+#### Flask + SQLite (read-only)
+Follow the [Flask quickstart](https://flask.palletsprojects.com/en/latest/quickstart/). For a public read-only tool, SQLite is simpler than Postgres and has no credential surface to leak:
+```python
+from flask import Flask, render_template, request
+import sqlite3
 
-#### Entity Extraction with AI
-Get an OpenAI API key (a few dollars of credits). Follow the [Structured outputs tutorial](https://platform.openai.com/docs/guides/structured-outputs). Extract entities from 100 documents:
-   ```python
-   from openai import OpenAI
-   client = OpenAI()
-   
-   response = client.chat.completions.create(
-       model="gpt-4",
-       messages=[{"role": "user", "content": f"Extract all people, companies, and dollar amounts from: {document_text}"}],
-       response_format={"type": "json_object"}
-   )
-   ```
+app = Flask(__name__)
 
-#### Local LLMs for Sensitive Docs
-Download [LM Studio](https://lmstudio.ai/) and a small model like Llama 3.2 3B. Try the same entity extraction locally for sensitive documents.
+def db():
+    return sqlite3.connect('investigation.db')
+
+@app.route('/')
+def search():
+    q = request.args.get('q', '')
+    if q:
+        conn = db()
+        cur = conn.cursor()
+        # Parameterized query — never f-string user input
+        cur.execute("SELECT * FROM records WHERE name LIKE ? LIMIT 100", (f'%{q}%',))
+        results = cur.fetchall()
+        return render_template('results.html', results=results, q=q)
+    return render_template('search.html')
+```
+
+#### Render Deployment
+Follow [Render's Flask deployment guide](https://render.com/docs/deploy-flask). The free tier handles classroom-scale traffic. (Heroku's free tier is gone; Render replaces it.)
+
+#### Security Audit
+Walk through your tool with the eyes of an attacker:
+- Where could SQL injection enter? (User input, search params, URL params.)
+- What credentials are in the deployed environment? (Should be read-only DB user only.)
+- What PII is exposed? (Names? Addresses? Tax IDs?)
+- What happens under load? (Ten queries/sec? A hundred?)
+
+#### Methodology Page
+Read three real methodology pages (above). Then write yours. It's a journalism deliverable, not documentation. Provenance, choices, limitations, what would change the conclusion.
 
 ### Practice Investigation
-Take 50-100 PDFs (FOIA documents, court records, etc.). Use AI to extract all mentioned entities, build a simple database of people, organizations, and dates, then find connections between documents.
+Build a simple public-facing tool from your earlier work. Deploy. Write the security audit. Write the methodology page. Test with a non-technical user.
 
-## Week 14: Sustainability
+---
+
+## Week 11: AI Document Processing (multilingual)
 
 ### Context Reading
-[What We've Learned About Sharing Our Data Analysis](https://source.opennews.org/articles/what-weve-learned-about-sharing-our-data-analysis/) and [AP's Datakit](https://github.com/associatedpress/datakit).
+[Quartz: How Quartz used AI for Luanda Leaks](https://qz.com/1786896/ai-for-investigations-sorting-through-the-luanda-leaks), [How BuzzFeed News Analyzed the FinCEN Files](https://www.buzzfeednews.com/article/jsvine/fincen-files-explainer-data-money-transactions), [AI for Data Journalism (Simon Willison)](https://simonw.substack.com/p/ai-for-data-journalism-demonstrating).
 
 ### Learn the Tech
 
-#### Documentation
-Create a README template for data projects. Include data sources, methodology, update schedule, and contact information.
+#### Structured Outputs at Scale
+With a multilingual document set (or your own language pair), extract entities using structured outputs. Process 50-100 documents in batch. Note your prompt explicitly — prompt is methodology.
 
-#### Automation for Longevity
-Set up GitHub Actions for weekly data updates. Add error notifications (email or Slack) and create data quality checks.
+#### Verification at Scale
+You can't read all 100 docs to verify. Strategies:
+- Sample-based audit (random 10-20 docs read manually, computed precision/recall on the sample)
+- Two-prompt agreement scoring (run twice with different framings; disagreement is a flag)
+- Held-back ground truth from a colleague
+
+#### Cost-Quality Tradeoffs
+Run the same task with Sonnet and Haiku. Measure quality drop. Measure cost ratio. Write up where Haiku is good enough.
+
+#### Local Options (briefly)
+[LM Studio](https://lmstudio.ai/) for sensitive documents. Try a small model like Llama 3 8B for the same extraction task. Note what you give up.
+
+### Practice Investigation
+Take 50-100 multilingual documents. Extract entities with structured outputs. Verify against a hand-checked subset. Write up what AI got wrong, the cost analysis, and a methodology page documenting the workflow.
+
+---
+
+## Week 12: Methodology Article + Sustainability
+
+### Context Reading
+[Washington Post Fatal Force methodology](https://www.washingtonpost.com/investigations/2022/12/05/washington-post-fatal-police-shootings-methodology/), [The Markup's Show Your Work series](https://themarkup.org/series/show-your-work), [What We've Learned About Sharing Our Data Analysis](https://source.opennews.org/articles/what-weve-learned-about-sharing-our-data-analysis/), [AP's Datakit](https://github.com/associatedpress/datakit-core).
+
+### Learn the Tech
+
+#### Methodology as Journalism
+The methodology article is the final exam. Pick the strongest project from the previous weeks. Read three real methodology articles cover-to-cover. Then write yours to the same standard:
+- Provenance (where the data came from, how you got it)
+- Choices (what you decided to count and not count, and why)
+- Limitations (what your numbers can't say)
+- What would change the conclusion (the falsifiability test)
+
+1,000-1,500 words. Write to publish.
+
+#### Bill Tracker Harvest
+Your Week 4 scraper has been running for ~8 weeks. Pull together a longitudinal analysis. Apply the question families to longitudinal questions. Write a 500-word memo: what changed, what's a story candidate, what's noise.
+
+#### Sustainability
+Pick one project you'd actually maintain. Write the runbook: scheduled updates, alerting when broken, who picks it up if you leave. Keep this realistic — most data projects die because the maintenance plan was aspirational.
 
 ### Practice Project
-Take one of your earlier projects and make it sustainable. Write complete documentation, add automated updates, create a handoff document, and set up alerts for when things break.
+Take one project you built earlier and:
+1. Write its methodology article (publication-quality)
+2. If it's longitudinal, harvest the accumulated data and write the findings memo
+3. Write the sustainability plan
+
+This is what shipping looks like.
+
+---
 
 ## Final Integration Project
 
-Combine everything into one investigation. Find a large government dataset (education, health, crime), load it with DuckDB/Postgres, set up automated updates with GitHub Actions, publish an exploration tool with Datasette, build a public interface with Flask, and document everything.
+Combine the threads into one investigation. Pick a real, public, non-trivial dataset. Build:
+- A queryable local copy (DuckDB, then Postgres if you need persistence)
+- A scheduled scraper for ongoing updates (GitHub Actions)
+- An entity-graph view of the relevant relationships (OpenAleph or a baby-Aleph you build)
+- A public-facing read-only tool (Flask + SQLite + Render)
+- A methodology article documenting all of it
 
-## Different Starting Points
+This is the shape of a real ProPublica-tier project — at smaller scale, but with the right pieces.
 
-### Strong on coding, new to journalism
-Start by reading all the investigation case studies to understand the journalistic context.
-
-### Strong on journalism, new to these tools
-Work through the mini-projects in order, focusing on the technical tutorials.
-
-### Need to get up to speed quickly
-Jump to the Final Integration Project and learn by doing.
+---
 
 ## Additional Resources
 
-Join [News Nerdery Slack](https://newsnerdery.org/) for community support. Subscribe to [Data Is Plural](https://www.data-is-plural.com/) for weekly dataset discoveries. Follow [Simon Willison](https://simonwillison.net/) for Datasette updates. Browse [NICAR-L archives](https://www.ire.org/nicar-l-mailing-list/) for real questions from working journalists.
+- [News Nerdery Slack](https://newsnerdery.org/) — community support
+- [Data Is Plural](https://www.data-is-plural.com/) — weekly dataset newsletter
+- [Simon Willison's Blog](https://simonwillison.net/) — Datasette and data journalism updates
+- [GIJN Resources](https://gijn.org/resources/) — global investigative journalism reference
+- [The Markup's Show Your Work](https://themarkup.org/series/show-your-work) — recurring methodology
 
 ## Quick Start
 
-If you want to get the core experience quickly, install DuckDB and Datasette, download some government data, query it with DuckDB, publish it with Datasette, and read about one major investigation like Panama Papers or the Washington Post's police shootings database. This gives you the essential workflow: making large datasets accessible for investigation and public use.
+For the core experience without doing everything: install DuckDB and Datasette, download an HMDA county slice, query it with DuckDB, publish it with Datasette, browse the [OCCRP public Aleph instance](https://aleph.occrp.org/), and read the [Cyprus Confidential methodology](https://www.icij.org/investigations/cyprus-confidential/leaked-data-journalism-methodology/). That's the essential workflow: making large datasets queryable, sharable, and joinable across investigations.
