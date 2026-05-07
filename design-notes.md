@@ -188,6 +188,12 @@ The 12 families:
 - International student body is a strength. Each student brings their own language pair.
 - Anchor: Quartz Luanda Leaks methodology (Apertium for Portuguese MT + sentence-level vector embeddings).
 
+### Semantic search intro — RESOLVED W4 lightweight
+
+- User noted the course was becoming very NER/entity-resolution heavy and asked where semantic/hybrid search could shine.
+- Settled: first exposure belongs in W4 because state legislative bills are the first naturally text-heavy dataset. Keep it lightweight through Datasette: keyword/full-text vs semantic search, with fuzzy search as the simple "not exact match" comparison.
+- W11 remains the deeper treatment: multilingual semantic search, extraction, and verification at scale.
+
 ### Verification of AI-generated SQL — RESOLVED via HMDA gotchas
 
 - **Concern:** "I don't know how we're going to find a wrong query or a mismatched result. Open to ideas though. Artificial dataset doesn't seem great. Probably domain-knowledge on HMDA is where we'll find it."

@@ -80,8 +80,14 @@ A small set of tools are *mentioned* (concept exposure, not taught) and noted as
 - **Getting Started:** https://docs.datasette.io/en/stable/getting_started.html
 - **Tutorials:** https://datasette.io/tutorials/
 - **Datasette Cloud:** https://datasette.cloud/
-- **Weeks:** 3, 6, 7, 10
-- **Why:** Internal SQL exploration, instant cloud sharing, the right default for "let an editor query this."
+- **Weeks:** 3, 4, 6, 7, 10
+- **Why:** Internal SQL exploration, instant cloud sharing, the right default for "let an editor query this." In Week 4 it also becomes the low-friction place to compare full-text and semantic search over bill text, with fuzzy search as a conceptual contrast.
+
+#### datasette-embeddings
+- **Plugin:** https://datasette.io/plugins/datasette-embeddings
+- **LLM embeddings docs:** https://llm.datasette.io/en/stable/embeddings/index.html
+- **Week:** 4 (light demo; revisited conceptually in Week 11)
+- **Why:** Adds semantic search to Datasette tables by storing embedding vectors. Use it as a simple search-beyond-exact-match demonstration, not as a full vector-database unit.
 
 #### TablePlus (optional)
 - **Download:** https://tableplus.com/
@@ -156,8 +162,8 @@ A small set of tools are *mentioned* (concept exposure, not taught) and noted as
 #### OpenAI API
 - **Docs:** https://platform.openai.com/docs
 - **Structured Outputs:** https://platform.openai.com/docs/guides/structured-outputs
-- **Weeks:** 9, 11
-- **Why:** Alternative AI provider; structured outputs guarantee parseable JSON.
+- **Weeks:** 4 (optional semantic-search demo), 9, 11
+- **Why:** Alternative AI provider; structured outputs guarantee parseable JSON. In Week 4 it may also provide embeddings for the lightweight Datasette semantic-search demo.
 
 #### Google NotebookLM (mentioned)
 - **Platform:** https://notebooklm.google.com/

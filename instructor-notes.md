@@ -243,17 +243,18 @@ Layered datasets each play multi-week roles:
 
 **Core question:** How do you build infrastructure that watches a dataset for months while you're working on other things?
 
-**Dataset:** Each student picks their own state legislative bill DB.
+**Dataset:** Each student picks their own state legislative bill DB, with bill titles, summaries, statuses, text URLs, and full text when feasible.
 
 **Skills:**
 - GitHub Actions (cron-scheduled jobs, secrets management)
 - Git-scraping pattern (Simon Willison's PG&E approach)
 - Change detection vs noise
+- Light search comparison over bill text: keyword/full-text vs semantic search in Datasette, with fuzzy search as a conceptual contrast
 - Error notifications when scrapers break
 
-**Deliverable:** Working scraper running daily, committing changes to git. A "what would make this break in 6 months" memo. The scraper continues running through the rest of the semester.
+**Deliverable:** Working scraper running daily, committing changes to git. A "what would make this break in 6 months" memo. In class, students use their bill table or an instructor demo to compare keyword/full-text and semantic search, using fuzzy search as the near-string comparison case. The scraper continues running through the rest of the semester.
 
-**What students should be able to explain:** the difference between meaningful change and noise; what makes a scraper survive a year unattended.
+**What students should be able to explain:** the difference between meaningful change and noise; what makes a scraper survive a year unattended; why fuzzy search handles spelling variation while semantic search handles different wording, and why neither is proof without reading the underlying bill.
 
 **Readings:**
 - [Simon Willison: "Git scraping: Track Changes Over Time"](https://simonwillison.net/2021/Mar/5/git-scraping/)
@@ -501,12 +502,13 @@ Measure all three against ground-truth subset. Write up which performed better, 
 |---|---|---|
 | DuckDB | W1-2 | SQL on big files, CSV-as-database |
 | PostgreSQL | W2-3 | When persistence/sharing matters |
-| Datasette | W3, W6, W7, W10 | SQL exploration, sharing, instant publishing |
+| Datasette | W3, W4, W6, W7, W10 | SQL exploration, sharing, search over bill text, instant publishing |
 | Backblaze B2 | W3 | S3-compatible object storage |
 | GitHub Actions | W4, W12 | Scheduled scrapers, automation |
 | OpenAleph | W6, W7, W9 | Entity-graph platform; FtM ontology |
 | Neo4j + Cypher | W8 | Graph database, network analysis |
 | rapidfuzz / dedupe | W9 | Fuzzy matching, entity resolution |
+| datasette-embeddings | W4 | Lightweight semantic search over bill text |
 | Anthropic / OpenAI structured outputs | W9, W11 | AI extraction |
 | Flask + SQLite | W10 | Read-only public tools |
 | Render | W10 | Deployment |

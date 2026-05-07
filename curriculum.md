@@ -157,19 +157,23 @@ Three scenarios force you to the cloud: your investigation team needs to query t
 **Journalistic Context:**
 Most important investigations aren't built on breaking news — they're built on systematic analysis of data over time. ProPublica's Dollars for Docs took months to clean, verify, and build. Simon Willison's PG&E outage tracker has tens of thousands of commits. The LA Times' LAPD crime statistics investigation required comparing years of reports. You need systems that let you incrementally improve data quality, track your cleaning decisions, and update analyses as new data arrives.
 
+Legislative bills are also the first text-heavy dataset in the course. Titles, summaries, and bill text create a natural moment to show that search is not one thing: keyword search finds exact terms, fuzzy search finds near spellings, and semantic search can find relevant text even when the wording is not an exact match. This is a light first exposure through Datasette before the deeper Week 11 work on multilingual semantic search, extraction, and verification.
+
 This week you build the scraper. It runs in the background for the rest of the semester. Week 12 is the harvest.
 
 **Must-Haves:**
-- **Concepts:** data versioning; reproducibility (can another reporter verify your work?); documentation as you go (you won't remember why you excluded those rows in eight weeks)
+- **Concepts:** data versioning; reproducibility (can another reporter verify your work?); documentation as you go (you won't remember why you excluded those rows in eight weeks); keyword, fuzzy, and semantic search as different search behaviors
 - **Technical Skills:**
   - GitHub Actions for scheduled scrapers
   - Git-scraping pattern (Simon Willison's approach)
   - Change detection — finding new records, deleted records, modifications
+  - Light Datasette search over bill titles, summaries, and text — full-text search plus a semantic-search demo, with fuzzy search as the comparison concept
   - Error notifications when scrapers break
 
 **Stories This Enables:**
 - Long-term tracking of police complaints
 - Monitoring changes in government databases
+- Searching bill text when the wording varies across agencies, committees, or sessions
 - Building institutional knowledge about datasets
 
 **Quick Win:** "Your scraper ran automatically while you slept."

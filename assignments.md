@@ -98,18 +98,27 @@ Set up a shared Postgres for a hypothetical team investigation. Create read-only
 [Curriculum](curriculum.md#week-4-long-term-tracking--build-the-bill-scraper) | [Tech stack](tech-stack.md#automation--workflows)
 
 ### Instructor Provides
-- **Low-prep:** GitHub Actions starter template, list of 3 state legislative DBs known to scrape cleanly
-- **High-prep:** A working scraper example with change detection, alert system, and error notification
+- **Low-prep:** GitHub Actions starter template, list of 3 state legislative DBs known to scrape cleanly with bill titles, summaries, statuses, and text URLs
+- **High-prep:** A working scraper example with change detection, alert system, error notification, and a small Datasette semantic-search demo over bill text
 
 ### Foundation: Your State Legislative Bill Scraper
 Pick a state legislative bill database. Build a GitHub Actions workflow that:
 1. Scrapes the database daily (or on whatever cadence makes sense)
-2. Stores each day's snapshot in git
+2. Stores each day's snapshot in git, including enough text for search: title, summary, status, bill text URL, and full text when feasible
 3. Notifies you (issue, email, or other) if the scraper breaks
 
 The scraper continues running for the rest of the semester. Week 12 is the harvest.
 
 **Writing Prompt** (300 words): "What about your chosen database is most likely to change in interesting ways over a semester? What would change in *boring* ways? How will you tell them apart?"
+
+### In-Class Mini: Search Beyond Exact Match
+Using your latest bill table in Datasette — or the instructor's demo table if your scraper is not ready yet — compare keyword/full-text search and semantic search. Use fuzzy search as the contrast case: spelling variation vs different wording. Search for a policy idea or description without requiring the exact words to appear. Write down:
+- The query you tried
+- One result that exact or full-text search found
+- One result that semantic search found
+- Which result you would actually inspect first as a reporter, and why
+
+The point is vocabulary and judgment, not building a perfect search engine.
 
 ### Extension: Smart Change Detection
 Detect meaningful changes (not just timestamps). Build a diff system that surfaces additions, deletions, and meaningful modifications. Generate a daily changelog.
@@ -117,7 +126,7 @@ Detect meaningful changes (not just timestamps). Build a diff system that surfac
 ### Innovation: Multi-source Coordination
 Track a second related source alongside your primary. Surface coordinated changes across both — when a bill changes status AND a related agency announcement changes, that's a story.
 
-**Common Issues:** sites that block GitHub Actions IPs; dynamic content that changes every load (timestamps, CSRF tokens) creating noise; rate-limit blocking; secrets management mistakes.
+**Common Issues:** sites that block GitHub Actions IPs; dynamic content that changes every load (timestamps, CSRF tokens) creating noise; rate-limit blocking; secrets management mistakes; treating a semantic-search hit as evidence without reading the text.
 
 ---
 

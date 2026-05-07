@@ -124,6 +124,18 @@ jobs:
 #### Change Detection
 A simple diff isn't enough. Build logic that surfaces *meaningful* change — new bills, status changes, vote outcomes — not just timestamp drift. Generate a daily changelog.
 
+#### Semantic Search for Bill Text
+Bill data is the first text-heavy dataset in the course. Store title, summary, status, bill text URL, and full text when feasible. Use Datasette to compare search modes: full-text search finds matching words, fuzzy search finds near spellings, and semantic search can find relevant text even when the wording is not an exact match.
+
+The simplest route is to enable full-text search on your bill table, then use the instructor's Datasette semantic-search demo or install `datasette-embeddings` for your own small table:
+```bash
+sqlite-utils enable-fts bills.db bills title summary full_text
+datasette install datasette-embeddings
+datasette bills.db
+```
+
+Try a few searches where you can describe what you mean but may not know the exact wording in the bill text. The point is not to trust the ranking; the point is to learn which leads each search mode surfaces.
+
 #### Data Acquisition Modes
 Most scale data acquisition is one of: bulk download of public data, FOIA for non-public, leaks, or build-it-yourself via scraping. Long-term tracking projects often combine modes. Sketch out where you'd get a hypothetical large dataset for a story you care about — what's public, what would need a request, what's only available by ongoing scraping?
 

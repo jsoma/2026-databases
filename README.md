@@ -41,7 +41,7 @@ The course follows the ProPublica model: acquire a significant dataset, analyze 
 
 #### **[Week 4](curriculum.md#week-4-long-term-tracking--build-the-bill-scraper): Long-term Tracking — Build the Bill Scraper**
 - "Your scraper ran automatically while you slept"
-- GitHub Actions, git-scraping, change detection
+- GitHub Actions, git-scraping, change detection, light semantic search over bill text
 - [Assignment](assignments.md#week-4-long-term-tracking--build-the-bill-scraper) • [Readings](readings.md#week-4-long-term-tracking--build-the-bill-scraper) • [Tech](tech-stack.md#automation--workflows)
 
 #### **[Week 5](curriculum.md#week-5-how-data-gets-acquired-and-grows-over-time): How Data Gets Acquired and Grows Over Time**
